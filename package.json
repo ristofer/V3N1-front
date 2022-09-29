@@ -1,7 +1,7 @@
 {
   "name": "v3n1-front",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,13 +15,27 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "axios": "^0.27.2",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "next": "12.3.1",
+    "prettier": "^2.7.1",
+    "prettier-linter-helpers": "^1.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-openapi-client": "^0.2.2"
   },
   "devDependencies": {
-    "eslint": "8.23.1",
-    "eslint-config-next": "12.3.1"
-  }
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-next": "12.3.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  },
+  "description": "parafront",
+  "main": "index.js",
+  "repository": "https://github.com/iaheck/v3n1-front.git",
+  "author": "v3n1",
+  "license": "MIT"
 }
