@@ -19,13 +19,14 @@ function CommentSection({ resourceId }) {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error</div>;
   }
 
   return (
     <Container maxWidth="sm">
       {data.map((comment) => (
         <Comment
+          key={comment.id}
           userName={comment.user_id}
           postTime="now"
           content={comment.content}
