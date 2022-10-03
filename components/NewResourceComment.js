@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceCommentForm from "./NewResourceCommentForm";
 
-const { FRONT_HOST } = process.env;
-
 function NewResourceComment({ resourceId }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
