@@ -4,7 +4,7 @@ import { useOperation } from "react-openapi-client";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const { loading, data, error } = useOperation("getSession");
+  const { loading, data, error } = useOperation('getSession');
 
   if (loading) {
     return <div>Loading...</div>;
