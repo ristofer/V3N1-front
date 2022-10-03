@@ -1,10 +1,10 @@
 import { OpenAPIProvider } from "react-openapi-client";
-import React from "react";
+import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceCommentForm from "./NewResourceCommentForm";
 
 function NewResourceComment({ resourceId }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const style = {
