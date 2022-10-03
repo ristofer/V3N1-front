@@ -11,14 +11,30 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useOperation, useOperationMethod } from "react-openapi-client";
 import SchoolIcon from "@mui/icons-material/School";
+import axios from "axios";
 
-const pages = ["Home"];
-const settings = ["Logout"];
+const pages = [{ text: "Home", url: "/" }];
 
-function ResponsiveAppBar({ userName }) {
+function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [endSession] = useOperationMethod("endSession");
+  const { loading, data, error } = useOperation("getSession");
+
+  let userName = null;
+  let userId = 0;
+  let settings = {};
+
+  const HandleSingOut = async () => {
+    await endSession();
+    if (window.location.pathname === "/") {
+      window.location.reload();
+    } else {
+      axios.get("/");
+    }
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +50,23 @@ function ResponsiveAppBar({ userName }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    userName = null;
+    userId = 0;
+    settings = [
+      { text: "Login", url: "users/sign_in" },
+      { text: "Signup", url: "users/sign_up" },
+    ];
+  } else {
+    userName = data.name;
+    userId = data.id;
+    settings = [{ text: "Logout", url: null }];
+  }
 
   return (
     <AppBar position="static">
@@ -88,8 +121,12 @@ function ResponsiveAppBar({ userName }) {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page.text}
+                  onClick={handleCloseNavMenu}
+                  href={page.url}
+                >
+                  <Typography textAlign="center">{page.text}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -116,11 +153,12 @@ function ResponsiveAppBar({ userName }) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.text}
                 onClick={handleCloseNavMenu}
+                href={page.url}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.text}
               </Button>
             ))}
           </Box>
@@ -128,7 +166,7 @@ function ResponsiveAppBar({ userName }) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
+                <Avatar alt={userName} src={`/avatar/${userId}.jpg`} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -148,8 +186,16 @@ function ResponsiveAppBar({ userName }) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.text} onClick={handleCloseUserMenu}>
+                  {setting.url == null ? (
+                    <Button onClick={HandleSingOut}>
+                      <Typography textAlign="center">{setting.text}</Typography>
+                    </Button>
+                  ) : (
+                    <Button href={setting.url}>
+                      <Typography textAlign="center">{setting.text}</Typography>
+                    </Button>
+                  )}
                 </MenuItem>
               ))}
             </Menu>
