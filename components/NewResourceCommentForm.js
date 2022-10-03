@@ -1,6 +1,6 @@
 import { useOperationMethod } from "react-openapi-client";
 import React, { useState, useCallback } from "react";
-import { TextField, Button, Box, CircularProgress } from "@mui/material";
+import { TextField, Button, Box, CircularProgress, Alert } from "@mui/material";
 
 function NewResourceCommentForm({ resourceId, handleClose }) {
   const [createResourceComment, { loading, error, data }] = useOperationMethod(
@@ -24,9 +24,9 @@ function NewResourceCommentForm({ resourceId, handleClose }) {
   if (error) {
     return (
       <>
-        <h6>
+        <Alert severity="error">
           Error {error.response.data.code}: {error.response.data.message}
-        </h6>
+        </Alert>
         <Button onClick={handleClose}>Close</Button>
       </>
     );
@@ -41,7 +41,7 @@ function NewResourceCommentForm({ resourceId, handleClose }) {
   if (data) {
     return (
       <>
-        <h6>Comment created: {data.content}</h6>
+        <Alert severity="success">Comment created: {data.content}</Alert>
         <Button onClick={handleClose}>Close</Button>
       </>
     );
