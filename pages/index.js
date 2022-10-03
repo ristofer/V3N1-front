@@ -1,20 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useOperation } from "react-openapi-client";
 import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../components/ResponsiveAppBar";
+import ResponsiveAppBar from "../components/navbar";
 
 export default function Home() {
-  const { loading, data, error } = useOperation("getSession");
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -26,11 +15,10 @@ export default function Home() {
       <ResponsiveAppBar />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to {data.name}</h1>
-
+        <h1 className={styles.title}>Welcome to Paraffin</h1>
+        <h1 className={styles.title}>by V3N1</h1>
         <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
+          Discover your next carrer as software developer
         </p>
 
         <div className={styles.grid}>
