@@ -1,12 +1,12 @@
 import { useOperationMethod } from "react-openapi-client";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { TextField, Button, Box, CircularProgress } from "@mui/material";
 
 function NewResourceCommentForm({ resourceId, handleClose }) {
   const [createResourceComment, { loading, error, data }] = useOperationMethod(
     "createResourceComment"
   );
-  const [formInput, setContent] = React.useState({ content: "" });
+  const [formInput, setContent] = useState({ content: "" });
 
   const handleChange = useCallback((event) => {
     setContent((prevFormInput) => {
@@ -15,7 +15,7 @@ function NewResourceCommentForm({ resourceId, handleClose }) {
         [event.target.name]: event.target.value,
       };
     });
-  }
+  }, []);
 
   const handleSubmit = () => {
     createResourceComment(resourceId, { content: formInput.content });
