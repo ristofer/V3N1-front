@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 import { useOperation } from "react-openapi-client";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import Comment from "./comment";
+import Comment from "./Comment";
 
 function CommentSection({ resourceId }) {
   const { loading, data, error } = useOperation(
