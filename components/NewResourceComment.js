@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceCommentForm from "./NewResourceCommentForm";
 
+const { FRONT_HOST } = process.env;
+
 function NewResourceComment({ resourceId }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -20,7 +22,7 @@ function NewResourceComment({ resourceId }) {
   };
 
   return (
-    <OpenAPIProvider definition="http://localhost:3001/api-docs/v1/swagger.json">
+    <OpenAPIProvider definition="/api-docs/v1/swagger.json">
       <Button onClick={handleOpen}>New comment</Button>
       <Modal hideBackdrop open={open} onClose={handleClose}>
         <Box sx={{ ...style, width: 300 }}>
