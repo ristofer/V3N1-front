@@ -20,7 +20,7 @@ function UserRating({ resourceId }) {
       name="simple-controlled"
       value={data.evaluation}
       onChange={(_event, newValue) => {
-        newValue;
+        console.log(newValue);
       }}
     />
   );

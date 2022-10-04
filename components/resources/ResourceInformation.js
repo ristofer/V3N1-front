@@ -10,7 +10,11 @@ import { Box, CircularProgress } from "@mui/material";
 import UserRating from "./UserRating";
 
 function ResourceInformation({ resourceId }) {
-  const { loading, data: resource, error } = useOperation("getResource", resourceId);
+  const {
+    loading,
+    data: resource,
+    error,
+  } = useOperation("getResource", resourceId);
 
   if (loading) {
     return (
@@ -24,8 +28,9 @@ function ResourceInformation({ resourceId }) {
     return <div>Error: {error.message}</div>;
   }
 
-    let evaluation = resource.average_evaluation;
-    const average = evaluation === null ? null : parseFloat(evaluation.slice(0, 3));
+  const evaluation = resource.average_evaluation;
+  const average =
+    evaluation === null ? null : parseFloat(evaluation.slice(0, 3));
 
   return (
     <Card>
