@@ -1,14 +1,14 @@
 import React from "react";
-import LearningUnitCheckbox from "../../components/LearningUnitCheckbox";
+import { useRouter } from "next/router";
+import LearningUnitsOfCurriculum from "../../components/LearningUnitsOfCurriculum";
+import Loader from "../../components/Loader";
 
 export default function LearningUnits() {
-  const isCompleted = false;
-  return (
-    <React.StrictMode>
-      <LearningUnitCheckbox
-        learningUnitId={1}
-        isPreviouslyCompleted={isCompleted}
-      />
-    </React.StrictMode>
-  );
+  const { query, isReady } = useRouter();
+  if (!isReady) {
+    return <Loader />;
+  }
+
+  const { curriculumId } = query;
+  return <LearningUnitsOfCurriculum curriculumId={curriculumId} />;
 }
