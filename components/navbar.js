@@ -1,19 +1,9 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import { useOperation, useOperationMethod } from "react-openapi-client";
-import SchoolIcon from "@mui/icons-material/School";
 import axios from "axios";
+import {AppBar, CircularProgress, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from "@mui/material";
+import SchoolIcon from "@mui/icons-material/School";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useOperation, useOperationMethod } from "react-openapi-client";
 
 const pages = [{ text: "Home", url: "/" }];
 
@@ -27,7 +17,7 @@ function ResponsiveAppBar() {
   let userId = 0;
   let settings = {};
 
-  const HandleSingOut = async () => {
+  const HandleSignOut = async () => {
     await endSession();
     if (window.location.pathname === "/") {
       window.location.reload();
@@ -52,7 +42,7 @@ function ResponsiveAppBar() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><CircularProgress /></div>;
   }
 
   if (error) {
@@ -164,7 +154,7 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Manage session">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt={userName} src={`/avatar/${userId}.jpg`} />
               </IconButton>
@@ -188,7 +178,7 @@ function ResponsiveAppBar() {
               {settings.map((setting) => (
                 <MenuItem key={setting.text} onClick={handleCloseUserMenu}>
                   {setting.url == null ? (
-                    <Button onClick={HandleSingOut}>
+                    <Button onClick={HandleSignOut}>
                       <Typography textAlign="center">{setting.text}</Typography>
                     </Button>
                   ) : (
