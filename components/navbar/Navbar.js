@@ -1,10 +1,11 @@
 import * as React from "react";
-import { AppBar, CircularProgress, Toolbar, Container } from "@mui/material";
+import { AppBar, Toolbar, Container } from "@mui/material";
 import { useOperation } from "react-openapi-client";
 import AppTitleAndLogo from "./AppTitleAndLogo";
 import UserBubble from "./UserBubble";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
+import Loader from "../common/Loader";
 
 const pages = [{ text: "Home", url: "/" }];
 
@@ -16,11 +17,7 @@ function ResponsiveAppBar() {
   let sessionActions = {};
 
   if (loading) {
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {
