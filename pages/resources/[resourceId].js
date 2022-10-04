@@ -2,13 +2,18 @@ import React from "react";
 import { useRouter } from "next/router";
 import NewResourceComment from "../../components/resources/NewResourceComment";
 import ResourceInformation from '../../components/ResourceInformation';
+import { Box, CircularProgress } from "@mui/material";
 
 export default function Resources() {
   const { query, isReady } = useRouter();
   const { resourceId } = query;
 
   if (!isReady) {
-    return <div>Loading...</div>
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

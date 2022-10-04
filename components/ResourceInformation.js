@@ -9,7 +9,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import UserRating from './UserRating';
-
+import { Box, CircularProgress } from "@mui/material";
 
 function ResourceInformation({ resourceId }) {
     console.log(resourceId);
@@ -17,9 +17,11 @@ function ResourceInformation({ resourceId }) {
 
     if (loading) {
         return (
-            <div>Loading...</div>
-        )
-    }
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          );
+          }
 
     if (error) {
         return <div>Error: {error.message}</div>;
