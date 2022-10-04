@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import { useOperation } from "react-openapi-client";
-import Loader from "./Loader";
+import Loader from "../common/Loader";
 import Comment from "./Comment";
 
 function CommentSection({ resourceId }) {
