@@ -10,8 +10,7 @@ import { Box, CircularProgress } from "@mui/material";
 import UserRating from "./UserRating";
 
 function ResourceInformation({ resourceId }) {
-  console.log(resourceId);
-  const { loading, data, error } = useOperation("getResource", resourceId);
+  const { loading, data: resource, error } = useOperation("getResource", resourceId);
 
   if (loading) {
     return (
@@ -25,36 +24,29 @@ function ResourceInformation({ resourceId }) {
     return <div>Error: {error.message}</div>;
   }
 
-  const average = () => {
-    const ave = data.average_evaluation;
-    if (!ave) {
-      return null;
-    }
-
-    return parseFloat(ave.slice(0, 3));
-  };
+    let evaluation = resource.average_evaluation;
+    const average = evaluation === null ? null : parseFloat(evaluation.slice(0, 3));
 
   return (
     <Card>
       <CardContent>
         <Typography variant="h5" component="div">
-          {data.name}
+          {resource.name}
         </Typography>
 
         <Rating
           id="resource-average"
           name="read-only"
-          value={average()}
+          value={average}
           precision={0.1}
           readOnly
         />
 
-        <Chip label={average()} variant="outlined" />
+        <Chip label={average} variant="outlined" />
 
         <CardActions>
-          <Button href={data.url} target="_blank" variant="outlined">
-            {" "}
-            Ver recurso{" "}
+          <Button href={resource.url} target="_blank" variant="outlined">
+            Ver recurso
           </Button>
         </CardActions>
 
