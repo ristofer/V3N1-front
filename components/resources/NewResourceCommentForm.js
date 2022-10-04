@@ -1,7 +1,7 @@
 import { useOperationMethod } from "react-openapi-client";
 import React, { useState, useCallback } from "react";
 import { TextField, Button, Alert } from "@mui/material";
-import Loader from "./Loader";
+import Loader from "../common/Loader";
 
 function NewResourceCommentForm({ resourceId, handleClose }) {
   const [createResourceComment, { loading, error, data }] = useOperationMethod(
