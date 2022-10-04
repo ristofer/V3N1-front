@@ -40,7 +40,6 @@ function LearningUnitCheckbox({ learningUnitId, isPreviouslyCompleted }) {
   };
   return (
     <Box sx={{ ...style, width: 300 }}>
-      <h1>here it goes</h1>
       <Checkbox checked={isCompleted} onChange={handleChange} />
     </Box>
   );
