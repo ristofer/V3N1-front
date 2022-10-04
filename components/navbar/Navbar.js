@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AppBar, CircularProgress, Toolbar, Container} from "@mui/material";
+import { AppBar, CircularProgress, Toolbar, Container } from "@mui/material";
 import { useOperation } from "react-openapi-client";
 import AppTitleAndLogo from "./AppTitleAndLogo";
 import UserBubble from "./UserBubble";
@@ -16,7 +16,11 @@ function ResponsiveAppBar() {
   let sessionActions = {};
 
   if (loading) {
-    return <div><CircularProgress /></div>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (error) {
@@ -36,11 +40,23 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AppTitleAndLogo display={{ xs: "none", md: "flex" }} variant="h6" flexGrow={0} />
-          <MobileMenu pages={pages}/>
-          <AppTitleAndLogo display={{ xs: "flex", md: "none" }} variant ="h5" flexGrow={1}/>
-          <DesktopMenu pages={pages}/>
-          <UserBubble sessionActions={sessionActions} userName={userName} userId={userId}/>
+          <AppTitleAndLogo
+            display={{ xs: "none", md: "flex" }}
+            variant="h6"
+            flexGrow={0}
+          />
+          <MobileMenu pages={pages} />
+          <AppTitleAndLogo
+            display={{ xs: "flex", md: "none" }}
+            variant="h5"
+            flexGrow={1}
+          />
+          <DesktopMenu pages={pages} />
+          <UserBubble
+            sessionActions={sessionActions}
+            userName={userName}
+            userId={userId}
+          />
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,16 +1,25 @@
 import * as React from "react";
 import axios from "axios";
-import {Box, IconButton, Typography, Menu, Avatar, Button, Tooltip, MenuItem} from "@mui/material";
-import { useOperation, useOperationMethod } from "react-openapi-client";
+import {
+  Box,
+  IconButton,
+  Typography,
+  Menu,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+} from "@mui/material";
+import { useOperationMethod } from "react-openapi-client";
 
-function UserBubble({sessionActions, userName, userId}) {
+function UserBubble({ sessionActions, userName, userId }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [endSession] = useOperationMethod("endSession");
-  
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -23,8 +32,8 @@ function UserBubble({sessionActions, userName, userId}) {
       axios.get("/");
     }
   };
-  
-  return(
+
+  return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Manage session">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

@@ -1,10 +1,10 @@
 import SchoolIcon from "@mui/icons-material/School";
 import Typography from "@mui/material/Typography";
 
-function AppTitleAndLogo({display, variant, flexGrow}) {
-  return(
+function AppTitleAndLogo({ display, variant, flexGrow }) {
+  return (
     <>
-      <SchoolIcon sx={{ display: display, mr: 1 }} />
+      <SchoolIcon sx={{ display, mr: 1 }} />
       <Typography
         variant={variant}
         noWrap
@@ -12,8 +12,8 @@ function AppTitleAndLogo({display, variant, flexGrow}) {
         href="/"
         sx={{
           mr: 2,
-          display: display,
-          flexGrow: flexGrow,
+          display,
+          flexGrow,
           fontFamily: "monospace",
           fontWeight: 700,
           letterSpacing: ".3rem",

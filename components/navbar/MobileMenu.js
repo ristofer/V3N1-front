@@ -1,19 +1,19 @@
 import * as React from "react";
-import {Box, IconButton, Typography, Menu, MenuItem} from "@mui/material";
+import { Box, IconButton, Typography, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-function MobileMenu({pages}) {
+function MobileMenu({ pages }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  
-  return(
+
+  return (
     <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
       <IconButton
         size="large"

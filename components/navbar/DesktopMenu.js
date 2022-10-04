@@ -1,14 +1,14 @@
 import * as React from "react";
-import {Box, Button} from "@mui/material";
+import { Box, Button } from "@mui/material";
 
-function DesktopMenu({pages}) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  
+function DesktopMenu({ pages }) {
+  const [setAnchorElNav] = React.useState(null);
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  
-  return(
+
+  return (
     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
       {pages.map((page) => (
         <Button
