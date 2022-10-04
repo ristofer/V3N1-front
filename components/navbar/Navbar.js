@@ -4,6 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useOperation, useOperationMethod } from "react-openapi-client";
 import AppTitleAndLogo from "./AppTitleAndLogo";
 import UserBubble from "./UserBubble";
+import DesktopMenu from "./DesktopMenu";
 
 const pages = [{ text: "Home", url: "/" }];
 
@@ -87,21 +88,8 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
           <AppTitleAndLogo display={{ xs: "flex", md: "none" }} variant ="h5" flexGrow={1}/>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.text}
-                onClick={handleCloseNavMenu}
-                href={page.url}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page.text}
-              </Button>
-            ))}
-          </Box>
-
+          <DesktopMenu pages={pages}/>
           <UserBubble sessionActions={settings} userName={userName} userId={userId}/>
-          
         </Toolbar>
       </Container>
     </AppBar>
