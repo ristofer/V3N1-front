@@ -50,7 +50,11 @@ function NewResourceForm({ learningUnitId, handleClose }) {
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
+      }}
+    >
       <TextField
         required
         fullWidth
@@ -61,7 +65,6 @@ function NewResourceForm({ learningUnitId, handleClose }) {
         onChange={handleChange}
         value={formInput.name}
       />
-      <br />
       <TextField
         required
         fullWidth
@@ -72,10 +75,9 @@ function NewResourceForm({ learningUnitId, handleClose }) {
         onChange={handleChange}
         value={formInput.url}
       />
-      <br />
       <Button onClick={handleSubmit}>Submit</Button>
       <Button onClick={handleClose}>Cancel</Button>
-    </>
+    </Box>
   );
 }
 
