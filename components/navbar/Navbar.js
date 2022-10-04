@@ -1,38 +1,13 @@
 import * as React from "react";
 import { AppBar, Toolbar, Container } from "@mui/material";
-import { useOperation } from "react-openapi-client";
 import AppTitleAndLogo from "./AppTitleAndLogo";
 import UserBubble from "./UserBubble";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import Loader from "../common/Loader";
 
 const pages = [{ text: "Home", url: "/" }];
 
 function ResponsiveAppBar() {
-  const { loading, data, error } = useOperation("getSession");
-
-  let userName = null;
-  let userId = 0;
-  let sessionActions = {};
-
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    userName = null;
-    userId = 0;
-    sessionActions = [
-      { text: "Login", url: "users/sign_in" },
-      { text: "Signup", url: "users/sign_up" },
-    ];
-  } else {
-    userName = data.name;
-    userId = data.id;
-    sessionActions = [{ text: "Logout", url: null }];
-  }
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -49,11 +24,7 @@ function ResponsiveAppBar() {
             flexGrow={1}
           />
           <DesktopMenu pages={pages} />
-          <UserBubble
-            sessionActions={sessionActions}
-            userName={userName}
-            userId={userId}
-          />
+          <UserBubble />
         </Toolbar>
       </Container>
     </AppBar>

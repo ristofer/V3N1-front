@@ -9,12 +9,44 @@ import {
   Button,
   Tooltip,
   MenuItem,
+  Skeleton,
 } from "@mui/material";
 import { useOperationMethod } from "react-openapi-client";
+import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
+import useAuthError from "../../modules/authentication/hooks/use-error";
+import useAuthLoading from "../../modules/authentication/hooks/use-loading";
 
-function UserBubble({ sessionActions, userName, userId }) {
+function UserBubble() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [endSession] = useOperationMethod("endSession");
+  const currentUser = useCurrentUser();
+  const error = useAuthError();
+  const loading = useAuthLoading();
+
+  let userName = null;
+  let userId = 0;
+  let sessionActions = {};
+
+  if (loading) {
+    return (
+      <div>
+        <Skeleton variant="circular" width={40} height={40} />
+      </div>
+    );
+  }
+
+  if (error) {
+    userName = null;
+    userId = 0;
+    sessionActions = [
+      { text: "Login", url: "users/sign_in" },
+      { text: "Signup", url: "users/sign_up" },
+    ];
+  } else {
+    userName = currentUser.name;
+    userId = currentUser.id;
+    sessionActions = [{ text: "Logout", url: null }];
+  }
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
