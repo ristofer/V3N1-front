@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import NewResourceComment from "../../components/NewResourceComment";
+import NewResourceComment from "../../components/resources/NewResourceComment";
 
 export default function Resources() {
   const router = useRouter();
