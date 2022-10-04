@@ -5,7 +5,7 @@ import { TextField, Button, Box, CircularProgress, Alert } from "@mui/material";
 function NewResourceForm({ learningUnitId, handleClose }) {
   const [createResource, { loading, error, data }] =
     useOperationMethod("createResource");
-  const [formInput, setContent] = useState({ name: "", url: "" });
+  const [formInput, setContent] = useState({ name: "", url: "http://" });
 
   const handleChange = useCallback((event) => {
     setContent((prevFormInput) => {
