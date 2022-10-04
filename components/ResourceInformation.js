@@ -1,84 +1,68 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { useOperation } from 'react-openapi-client';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip'
-import Rating from '@mui/material/Rating';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import UserRating from './UserRating';
+import { useOperation } from "react-openapi-client";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
+import Rating from "@mui/material/Rating";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import { Box, CircularProgress } from "@mui/material";
+import UserRating from "./UserRating";
 
 function ResourceInformation({ resourceId }) {
-    console.log(resourceId);
-    const { loading, data, error } = useOperation('getResource', resourceId);
+  console.log(resourceId);
+  const { loading, data, error } = useOperation("getResource", resourceId);
 
-    if (loading) {
-        return (
-            <Box sx={{ display: "flex" }}>
-              <CircularProgress />
-            </Box>
-          );
-          }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-
-    const average = () => {
-        let ave = data.average_evaluation
-        if ( ave ) {
-            return parseFloat(ave.slice(0, 3))
-        }
-        else{
-            return 0
-        }
-    }
-    // let average = parseFloat(data.average_evaluation.slice(0, 3))
+  if (loading) {
     return (
-        <Card>
-            <CardContent>
-                <div>
-                    <Typography variant="h5" component="div">
-                        {data.name}
-                    </Typography>
-                </div>
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
-                <div>
-                    <div>
-                        <Rating
-                            id="resource-average"
-                            name="read-only"
-                            value={average()}
-                            precision={0.1} readOnly
-                        />
-                    </div>
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
-                    <div>
-                        <Chip label={average()} variant="outlined" />
-                    </div>
-                </div>
+  const average = () => {
+    const ave = data.average_evaluation;
+    if (!ave) {
+      return null;
+    }
 
-                <div>
-                    <CardActions>
-                        <Button href={data.url} target="_blank" variant="outlined"> Ver recurso </Button>
-                    </CardActions>
-                </div>
+    return parseFloat(ave.slice(0, 3));
+  };
 
-                <div>
-                    <div>
-                        Your evaluation:
-                    </div>
+  return (
+    <Card>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          {data.name}
+        </Typography>
 
-                    <div>
-                        <UserRating resourceId={resourceId}/>
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
-    )
+        <Rating
+          id="resource-average"
+          name="read-only"
+          value={average()}
+          precision={0.1}
+          readOnly
+        />
 
+        <Chip label={average()} variant="outlined" />
+
+        <CardActions>
+          <Button href={data.url} target="_blank" variant="outlined">
+            {" "}
+            Ver recurso{" "}
+          </Button>
+        </CardActions>
+
+        <Typography component="div">Your evaluation</Typography>
+
+        <UserRating resourceId={resourceId} />
+      </CardContent>
+    </Card>
+  );
 }
 export default ResourceInformation;
