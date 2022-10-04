@@ -4,6 +4,7 @@ import {AppBar, CircularProgress, Box, Toolbar, IconButton, Typography, Menu, Co
 import SchoolIcon from "@mui/icons-material/School";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useOperation, useOperationMethod } from "react-openapi-client";
+import AppTitleAndLogo from "./AppTitleAndLogo";
 
 const pages = [{ text: "Home", url: "/" }];
 
@@ -62,24 +63,7 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <SchoolIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            V3N1
-          </Typography>
+          <AppTitleAndLogo display={{ xs: "none", md: "flex" }} variant="h6" flexGrow={0} />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -121,25 +105,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <SchoolIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            V3N1
-          </Typography>
+          <AppTitleAndLogo display={{ xs: "flex", md: "none" }} variant ="h5" flexGrow={1}/>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
