@@ -1,6 +1,7 @@
 import { useOperationMethod } from "react-openapi-client";
 import React, { useState, useCallback } from "react";
-import { TextField, Button, Box, CircularProgress, Alert } from "@mui/material";
+import { TextField, Button, Alert } from "@mui/material";
+import Loader from "./Loader";
 
 function NewResourceCommentForm({ resourceId, handleClose }) {
   const [createResourceComment, { loading, error, data }] = useOperationMethod(
@@ -32,11 +33,7 @@ function NewResourceCommentForm({ resourceId, handleClose }) {
     );
   }
   if (loading) {
-    return (
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress />
-      </Box>
-    );
+    return <Loader />;
   }
   if (data) {
     return (

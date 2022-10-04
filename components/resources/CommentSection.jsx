@@ -1,7 +1,6 @@
 import Container from "@mui/material/Container";
 import { useOperation } from "react-openapi-client";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import Loader from "./Loader";
 import Comment from "./Comment";
 
 function CommentSection({ resourceId }) {
@@ -11,11 +10,7 @@ function CommentSection({ resourceId }) {
   );
 
   if (loading) {
-    return (
-      <Box>
-        <CircularProgress />
-      </Box>
-    );
+    return <Loader />;
   }
 
   if (error) {
