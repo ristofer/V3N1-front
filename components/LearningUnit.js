@@ -8,7 +8,6 @@ import {
 import LearningUnitCheckbox from "./LearningUnitCheckbox";
 
 function LearningUnit({ learningUnit, isPreviouslyCompleted }) {
-  console.log(learningUnit);
   const { id: learningUnitId, name } = learningUnit;
 
   return (
