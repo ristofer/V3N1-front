@@ -9,10 +9,11 @@ import LearningUnitCheckbox from "./LearningUnitCheckbox";
 
 function LearningUnit({ learningUnit, isPreviouslyCompleted }) {
   const { id: learningUnitId, name } = learningUnit;
+  const learningUnitPath = "/learningUnits/";
 
   return (
     <Card sx={{ maxWidth: 345, display: "flex", m: 2 }}>
-      <CardActionArea href={`/learningUnits/${learningUnitId}`}>
+      <CardActionArea href={learningUnitPath + learningUnitId}>
         <CardContent>
           <Typography variant="h4" component="div" position="center">
             {name}

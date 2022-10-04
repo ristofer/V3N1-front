@@ -20,8 +20,6 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
     error: learningUnitsError,
   } = useOperation("listLearningUnitsOfCurriculum", curriculumId);
 
-  // const isCompleted = false;
-
   if (learningUnitsError || completedError) {
     return <Alert severity="error">Error</Alert>;
   }
@@ -37,6 +35,7 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
     <Container maxWidth="sm">
       {learningUnitsData.map((learningUnit) => (
         <LearningUnit
+          key={learningUnit.id}
           learningUnit={learningUnit}
           isPreviouslyCompleted={completedLearningUnits.includes(
             learningUnit.id
