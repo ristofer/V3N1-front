@@ -1,6 +1,13 @@
 import { useOperationMethod } from "react-openapi-client";
 import React, { useState, useCallback } from "react";
-import { TextField, Button, Box, CircularProgress, Alert } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  CircularProgress,
+  Alert,
+  Stack,
+} from "@mui/material";
 
 function NewResourceForm({ learningUnitId, handleClose }) {
   const [createResource, { loading, error, data }] =
@@ -29,7 +36,9 @@ function NewResourceForm({ learningUnitId, handleClose }) {
         <Alert severity="error">
           Error {error.response.data.code}: {error.response.data.message}
         </Alert>
-        <Button onClick={handleClose}>Close</Button>
+        <Stack>
+          <Button onClick={handleClose}>Close</Button>
+        </Stack>
       </>
     );
   }
@@ -44,7 +53,11 @@ function NewResourceForm({ learningUnitId, handleClose }) {
     return (
       <>
         <Alert severity="success">Resource {data.name} created!</Alert>
-        <Button onClick={handleClose}>Close</Button>
+        <Stack>
+          <Button align="right" onClick={handleClose}>
+            Close
+          </Button>
+        </Stack>
       </>
     );
   }
@@ -52,12 +65,11 @@ function NewResourceForm({ learningUnitId, handleClose }) {
   return (
     <Box
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        "& .MuiTextField-root": { mb: 2, width: "25ch" },
       }}
     >
       <TextField
         required
-        fullWidth
         type="text"
         id="name"
         name="name"
@@ -67,7 +79,6 @@ function NewResourceForm({ learningUnitId, handleClose }) {
       />
       <TextField
         required
-        fullWidth
         type="text"
         id="url"
         name="url"
@@ -75,8 +86,14 @@ function NewResourceForm({ learningUnitId, handleClose }) {
         onChange={handleChange}
         value={formInput.url}
       />
-      <Button onClick={handleSubmit}>Submit</Button>
-      <Button onClick={handleClose}>Cancel</Button>
+      <Stack direction="row" spacing={1}>
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
+        <Button variant="outlined" color="error" onClick={handleClose}>
+          Cancel
+        </Button>
+      </Stack>
     </Box>
   );
 }
