@@ -86,12 +86,12 @@ function NewResourceForm({ learningUnitId, handleClose }) {
         onChange={handleChange}
         value={formInput.url}
       />
-      <Stack direction="row" spacing={1}>
-        <Button variant="contained" onClick={handleSubmit}>
-          Submit
-        </Button>
+      <Stack direction="row" spacing={10}>
         <Button variant="outlined" color="error" onClick={handleClose}>
           Cancel
+        </Button>
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
         </Button>
       </Stack>
     </Box>
