@@ -1,7 +1,7 @@
 import React from "react";
 import { useOperation } from "react-openapi-client";
 import { Alert, Container } from "@mui/material";
-import Loader from "./Loader";
+import Loader from "../common/Loader";
 import LearningUnit from "./LearningUnit";
 
 export default function LearningUnitsOfCurriculum({ curriculumId }) {
