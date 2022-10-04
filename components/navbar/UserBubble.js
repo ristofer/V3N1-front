@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import {
   Box,
   IconButton,
@@ -11,17 +10,17 @@ import {
   MenuItem,
   Skeleton,
 } from "@mui/material";
-import { useOperationMethod } from "react-openapi-client";
 import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
 import useAuthError from "../../modules/authentication/hooks/use-error";
 import useAuthLoading from "../../modules/authentication/hooks/use-loading";
+import useSignOut from "../../modules/authentication/hooks/use-sign-out";
 
 function UserBubble() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [endSession] = useOperationMethod("endSession");
   const currentUser = useCurrentUser();
   const error = useAuthError();
   const loading = useAuthLoading();
+  const signOut = useSignOut();
 
   let userName = null;
   let userId = 0;
@@ -56,15 +55,6 @@ function UserBubble() {
     setAnchorElUser(null);
   };
 
-  const HandleSignOut = async () => {
-    await endSession();
-    if (window.location.pathname === "/") {
-      window.location.reload();
-    } else {
-      axios.get("/");
-    }
-  };
-
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Manage session">
@@ -91,7 +81,7 @@ function UserBubble() {
         {sessionActions.map((setionAction) => (
           <MenuItem key={setionAction.text} onClick={handleCloseUserMenu}>
             {setionAction.url == null ? (
-              <Button onClick={HandleSignOut}>
+              <Button onClick={signOut}>
                 <Typography textAlign="center">{setionAction.text}</Typography>
               </Button>
             ) : (
