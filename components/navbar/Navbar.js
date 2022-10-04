@@ -1,45 +1,26 @@
 import * as React from "react";
-import axios from "axios";
 import {AppBar, CircularProgress, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from "@mui/material";
-import SchoolIcon from "@mui/icons-material/School";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useOperation, useOperationMethod } from "react-openapi-client";
 import AppTitleAndLogo from "./AppTitleAndLogo";
+import UserBubble from "./UserBubble";
 
 const pages = [{ text: "Home", url: "/" }];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [endSession] = useOperationMethod("endSession");
   const { loading, data, error } = useOperation("getSession");
 
   let userName = null;
   let userId = 0;
   let settings = {};
 
-  const HandleSignOut = async () => {
-    await endSession();
-    if (window.location.pathname === "/") {
-      window.location.reload();
-    } else {
-      axios.get("/");
-    }
-  };
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   if (loading) {
@@ -119,43 +100,8 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Manage session">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={userName} src={`/avatar/${userId}.jpg`} />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting.text} onClick={handleCloseUserMenu}>
-                  {setting.url == null ? (
-                    <Button onClick={HandleSignOut}>
-                      <Typography textAlign="center">{setting.text}</Typography>
-                    </Button>
-                  ) : (
-                    <Button href={setting.url}>
-                      <Typography textAlign="center">{setting.text}</Typography>
-                    </Button>
-                  )}
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <UserBubble sessionActions={settings} userName={userName} userId={userId}/>
+          
         </Toolbar>
       </Container>
     </AppBar>
