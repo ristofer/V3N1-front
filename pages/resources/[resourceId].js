@@ -1,25 +1,18 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Box, CircularProgress } from "@mui/material";
-import NewResourceComment from "../../components/resources/NewResourceComment";
+import CommentSection from "../../components/resources/CommentSection";
+import Loader from "../../components/common/Loader";
 import ResourceInformation from "../../components/resources/ResourceInformation";
 
 export default function Resources() {
   const { query, isReady } = useRouter();
+  if (!isReady) return <Loader />;
+
   const { resourceId } = query;
-
-  if (!isReady) {
-    return (
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <React.StrictMode>
       <ResourceInformation resourceId={resourceId} />
-      <NewResourceComment resourceId={resourceId} />
+      <CommentSection resourceId={resourceId} />
     </React.StrictMode>
   );
 }
