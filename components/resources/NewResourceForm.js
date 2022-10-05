@@ -1,13 +1,7 @@
 import { useOperationMethod } from "react-openapi-client";
 import React, { useState, useCallback } from "react";
-import {
-  TextField,
-  Button,
-  Box,
-  CircularProgress,
-  Alert,
-  Stack,
-} from "@mui/material";
+import { TextField, Button, Box, Alert, Stack } from "@mui/material";
+import Loader from "../common/Loader";
 
 function NewResourceForm({ learningUnitId, handleClose }) {
   const [createResource, { loading, error, data }] =
@@ -43,11 +37,7 @@ function NewResourceForm({ learningUnitId, handleClose }) {
     );
   }
   if (loading) {
-    return (
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress />
-      </Box>
-    );
+    return <Loader />;
   }
   if (data) {
     return (

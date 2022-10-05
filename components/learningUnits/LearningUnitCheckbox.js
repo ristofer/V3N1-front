@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Box, Checkbox } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import { useOperationMethod } from "react-openapi-client";
 
 function LearningUnitCheckbox({ learningUnitId, isPreviouslyCompleted }) {
@@ -27,22 +27,7 @@ function LearningUnitCheckbox({ learningUnitId, isPreviouslyCompleted }) {
     setCompletion,
   ]);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-  return (
-    <Box sx={{ ...style, width: 300 }}>
-      <Checkbox checked={isCompleted} onChange={handleChange} />
-    </Box>
-  );
+  return <Checkbox checked={isCompleted} onChange={handleChange} />;
 }
 
 export default LearningUnitCheckbox;
