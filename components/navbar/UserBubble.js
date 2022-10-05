@@ -10,6 +10,7 @@ import {
   MenuItem,
   Skeleton,
 } from "@mui/material";
+import Link from "next/link";
 import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
 import useAuthError from "../../modules/authentication/hooks/use-error";
 import useAuthLoading from "../../modules/authentication/hooks/use-loading";
@@ -81,13 +82,13 @@ function UserBubble() {
         {sessionActions.map((setionAction) => (
           <MenuItem key={setionAction.text} onClick={handleCloseUserMenu}>
             {setionAction.url == null ? (
-              <Button onClick={signOut}>
+              <Button onClick={signOut} color="error">
                 <Typography textAlign="center">{setionAction.text}</Typography>
               </Button>
             ) : (
-              <Button href={setionAction.url}>
+              <Link href={setionAction.url}>
                 <Typography textAlign="center">{setionAction.text}</Typography>
-              </Button>
+              </Link>
             )}
           </MenuItem>
         ))}
