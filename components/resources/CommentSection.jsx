@@ -27,9 +27,10 @@ function CommentSection({ resourceId }) {
       {data.map((comment) => (
         <Comment
           key={comment.id}
-          userName={comment.user_id}
-          postTime="now"
+          userName={comment.user.name}
+          postTime={comment.created_at}
           content={comment.content}
+          userId={comment.user.id}
         />
       ))}
     </Container>
