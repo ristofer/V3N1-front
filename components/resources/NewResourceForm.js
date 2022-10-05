@@ -3,7 +3,7 @@ import React, { useState, useCallback } from "react";
 import { TextField, Button, Box, Alert, Stack } from "@mui/material";
 import Loader from "../common/Loader";
 
-function NewResourceForm({ learningUnitId, handleClose }) {
+function NewResourceForm({ learningUnitId, handleClose, listResources }) {
   const [createResource, { loading, error, data }] =
     useOperationMethod("createResource");
   const [formInput, setContent] = useState({ name: "", url: "http://" });
@@ -44,7 +44,13 @@ function NewResourceForm({ learningUnitId, handleClose }) {
       <>
         <Alert severity="success">Resource {data.name} created!</Alert>
         <Stack>
-          <Button align="right" onClick={handleClose}>
+          <Button
+            align="right"
+            onClick={() => {
+              handleClose();
+              listResources(learningUnitId);
+            }}
+          >
             Close
           </Button>
         </Stack>
