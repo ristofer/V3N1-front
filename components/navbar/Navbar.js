@@ -6,7 +6,7 @@ import MobileMenu from "./MobileMenu";
 
 const pages = [{ text: "Home", url: "/" }];
 
-function ResponsiveAppBar() {
+function Navbar() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -29,4 +29,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Navbar;
