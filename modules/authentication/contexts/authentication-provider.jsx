@@ -11,7 +11,7 @@ function AuthenticationProvider({ children }) {
 
   const signOut = useCallback(async () => {
     await endSession();
-    await Router.push("/");
+    await Router.push("/landing/");
     window.location.reload();
   }, [endSession]);
 
