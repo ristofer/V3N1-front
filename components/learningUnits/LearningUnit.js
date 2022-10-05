@@ -22,7 +22,7 @@ function LearningUnit({ learningUnit, isPreviouslyCompleted }) {
       </CardActionArea>
       <CardActions>
         <LearningUnitCheckbox
-          learningUnitId={learningUnit.id}
+          learningUnitId={learningUnitId}
           isPreviouslyCompleted={isPreviouslyCompleted}
         />
       </CardActions>
