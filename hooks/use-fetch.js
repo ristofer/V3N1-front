@@ -4,7 +4,7 @@ import useSignOut from "../modules/authentication/hooks/use-sign-out";
 const useFetch = (url) => {
   const signOut = useSignOut();
 
-  const fetcher = async (url) => {
+  const fetcher = async () => {
     const res = await fetch(url);
 
     if (!res.ok) {
