@@ -15,14 +15,6 @@ function UserRating({ resourceId }) {
     return <div>Error: {error.message}</div>;
   }
 
-  return (
-    <Rating
-      name="simple-controlled"
-      value={data.evaluation}
-      onChange={(_event, newValue) => {
-        console.log(newValue);
-      }}
-    />
-  );
+  return <Rating name="simple-controlled-d" value={data.evaluation} />;
 }
 export default UserRating;
