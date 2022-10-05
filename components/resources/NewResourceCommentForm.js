@@ -3,7 +3,11 @@ import React, { useState, useCallback } from "react";
 import { TextField, Button, Alert } from "@mui/material";
 import Loader from "../common/Loader";
 
-function NewResourceCommentForm({ resourceId, handleClose }) {
+function NewResourceCommentForm({
+  resourceId,
+  handleClose,
+  newCommentCreation,
+}) {
   const [createResourceComment, { loading, error, data }] = useOperationMethod(
     "createResourceComment"
   );
@@ -39,7 +43,14 @@ function NewResourceCommentForm({ resourceId, handleClose }) {
     return (
       <>
         <Alert severity="success">Comment created: {data.content}</Alert>
-        <Button onClick={handleClose}>Close</Button>
+        <Button
+          onClick={async () => {
+            handleClose();
+            newCommentCreation();
+          }}
+        >
+          Close
+        </Button>
       </>
     );
   }
