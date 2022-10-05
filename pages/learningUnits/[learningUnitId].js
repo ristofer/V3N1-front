@@ -1,14 +1,18 @@
 import React from "react";
 import { useRouter } from "next/router";
-import NewResource from "../../components/resources/NewResource";
+import ResourcesOfLearningUnit from "../../components/resources/ResourcesOfLearningUnit";
+import Loader from "../../components/common/Loader";
 
 export default function LearningUnits() {
-  const router = useRouter();
-  const { learningUnitId } = router.query;
+  const { query, isReady } = useRouter();
+  if (!isReady) {
+    return <Loader />;
+  }
 
+  const { learningUnitId } = query;
   return (
     <React.StrictMode>
-      <NewResource learningUnitId={learningUnitId} />
+      <ResourcesOfLearningUnit learningUnitId={learningUnitId} />
     </React.StrictMode>
   );
 }
