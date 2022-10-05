@@ -1,8 +1,8 @@
-import * as React from "react";
+import { useState } from "react";
 import { Box, Button } from "@mui/material";
 
 function DesktopMenu({ pages }) {
-  const [setAnchorElNav] = React.useState(null);
+  const [setAnchorElNav] = useState(null);
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);

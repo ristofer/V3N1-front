@@ -1,4 +1,3 @@
-import * as React from "react";
 import { AppBar, Toolbar, Container } from "@mui/material";
 import AppTitleAndLogo from "./AppTitleAndLogo";
 import UserBubble from "./UserBubble";

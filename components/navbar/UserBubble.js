@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import {
   Box,
   IconButton,
@@ -16,7 +16,7 @@ import useAuthLoading from "../../modules/authentication/hooks/use-loading";
 import useSignOut from "../../modules/authentication/hooks/use-sign-out";
 
 function UserBubble() {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const currentUser = useCurrentUser();
   const error = useAuthError();
   const loading = useAuthLoading();
