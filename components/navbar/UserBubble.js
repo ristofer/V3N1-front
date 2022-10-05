@@ -1,5 +1,4 @@
-import * as React from "react";
-import axios from "axios";
+import { useState } from "react";
 import {
   Box,
   IconButton,
@@ -9,12 +8,44 @@ import {
   Button,
   Tooltip,
   MenuItem,
+  Skeleton,
 } from "@mui/material";
-import { useOperationMethod } from "react-openapi-client";
+import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
+import useAuthError from "../../modules/authentication/hooks/use-error";
+import useAuthLoading from "../../modules/authentication/hooks/use-loading";
+import useSignOut from "../../modules/authentication/hooks/use-sign-out";
 
-function UserBubble({ sessionActions, userName, userId }) {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [endSession] = useOperationMethod("endSession");
+function UserBubble() {
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const currentUser = useCurrentUser();
+  const error = useAuthError();
+  const loading = useAuthLoading();
+  const signOut = useSignOut();
+
+  let userName = null;
+  let userId = 0;
+  let sessionActions = {};
+
+  if (loading) {
+    return (
+      <div>
+        <Skeleton variant="circular" width={40} height={40} />
+      </div>
+    );
+  }
+
+  if (error) {
+    userName = null;
+    userId = 0;
+    sessionActions = [
+      { text: "Login", url: "users/sign_in" },
+      { text: "Signup", url: "users/sign_up" },
+    ];
+  } else {
+    userName = currentUser.name;
+    userId = currentUser.id;
+    sessionActions = [{ text: "Logout", url: null }];
+  }
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -22,15 +53,6 @@ function UserBubble({ sessionActions, userName, userId }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  const HandleSignOut = async () => {
-    await endSession();
-    if (window.location.pathname === "/") {
-      window.location.reload();
-    } else {
-      axios.get("/");
-    }
   };
 
   return (
@@ -59,7 +81,7 @@ function UserBubble({ sessionActions, userName, userId }) {
         {sessionActions.map((setionAction) => (
           <MenuItem key={setionAction.text} onClick={handleCloseUserMenu}>
             {setionAction.url == null ? (
-              <Button onClick={HandleSignOut}>
+              <Button onClick={signOut}>
                 <Typography textAlign="center">{setionAction.text}</Typography>
               </Button>
             ) : (
