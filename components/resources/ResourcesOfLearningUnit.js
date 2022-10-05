@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
-import { useOperationMethod } from "react-openapi-client";
+import React from "react";
 import { Alert, Container } from "@mui/material";
+import useSWR from "swr";
 import Loader from "../common/Loader";
 import Resource from "./Resource";
 import NewResource from "./NewResource";
 
 export default function ResourcesOfLearningUnit({ learningUnitId }) {
-  const [listResources, { loading, error, data }] =
-    useOperationMethod("listResources");
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  useEffect(() => {
-    listResources(learningUnitId);
-  }, [listResources, learningUnitId]);
+  const { data, error, mutate } = useSWR(
+    `/api/learning_units/${learningUnitId}/resources`,
+    fetcher
+  );
+  if (error) return <Alert severity="error">Error</Alert>;
+  if (!data) return <Loader />;
 
-  if (error) {
-    return <Alert severity="error">Error</Alert>;
-  }
-  if (loading || !data) {
-    return <Loader />;
-  }
   data.sort((a, b) => b.average_evaluation < a.average_evaluation);
+
+  const newResourceCreation = () => {
+    mutate();
+  };
 
   return (
     <Container maxWidth="sm">
@@ -28,7 +28,7 @@ export default function ResourcesOfLearningUnit({ learningUnitId }) {
       ))}
       <NewResource
         learningUnitId={learningUnitId}
-        listResources={listResources}
+        newResourceCreation={newResourceCreation}
       />
     </Container>
   );
