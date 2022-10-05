@@ -79,15 +79,15 @@ function UserBubble() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {sessionActions.map((setionAction) => (
-          <MenuItem key={setionAction.text} onClick={handleCloseUserMenu}>
-            {setionAction.url == null ? (
+        {sessionActions.map((sessionAction) => (
+          <MenuItem key={sessionAction.text} onClick={handleCloseUserMenu}>
+            {sessionAction.url == null ? (
               <Button onClick={signOut} color="error">
-                <Typography textAlign="center">{setionAction.text}</Typography>
+                <Typography textAlign="center">{sessionAction.text}</Typography>
               </Button>
             ) : (
-              <Link href={setionAction.url}>
-                <Typography textAlign="center">{setionAction.text}</Typography>
+              <Link href={sessionAction.url}>
+                <Typography textAlign="center">{sessionAction.text}</Typography>
               </Link>
             )}
           </MenuItem>
