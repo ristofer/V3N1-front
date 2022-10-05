@@ -1,21 +1,17 @@
 import React from "react";
 import { Alert, Container } from "@mui/material";
-import useSWR from "swr";
+import useFetch from "../../hooks/use-fetch";
 import Loader from "../common/Loader";
 import Resource from "./Resource";
 import NewResource from "./NewResource";
 
 export default function ResourcesOfLearningUnit({ learningUnitId }) {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-  const { data, error, mutate } = useSWR(
-    `/api/learning_units/${learningUnitId}/resources`,
-    fetcher
+  const { data, error, mutate } = useFetch(
+    `/api/learning_units/${learningUnitId}/resources`
   );
   if (error) return <Alert severity="error">Error</Alert>;
   if (!data) return <Loader />;
-
-  data.sort((a, b) => b.average_evaluation < a.average_evaluation);
+  data.sort((a, b) => (b.average_evaluation > a.average_evaluation ? 1 : -1));
 
   const newResourceCreation = () => {
     mutate();
