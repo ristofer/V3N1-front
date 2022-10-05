@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceForm from "./NewResourceForm";
 
-function NewResource({ learningUnitId, listResources }) {
+function NewResource({ learningUnitId, newResourceCreation }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,7 +27,7 @@ function NewResource({ learningUnitId, listResources }) {
           <NewResourceForm
             learningUnitId={learningUnitId}
             handleClose={handleClose}
-            listResources={listResources}
+            newResourceCreation={newResourceCreation}
           />
         </Box>
       </Modal>

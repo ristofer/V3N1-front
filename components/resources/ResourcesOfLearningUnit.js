@@ -1,25 +1,21 @@
-import React, { useEffect } from "react";
-import { useOperationMethod } from "react-openapi-client";
+import React from "react";
 import { Alert, Container } from "@mui/material";
+import useFetch from "../../hooks/use-fetch";
 import Loader from "../common/Loader";
 import Resource from "./Resource";
 import NewResource from "./NewResource";
 
 export default function ResourcesOfLearningUnit({ learningUnitId }) {
-  const [listResources, { loading, error, data }] =
-    useOperationMethod("listResources");
+  const { data, error, mutate } = useFetch(
+    `/api/learning_units/${learningUnitId}/resources`
+  );
+  if (error) return <Alert severity="error">Error</Alert>;
+  if (!data) return <Loader />;
+  data.sort((a, b) => (b.average_evaluation > a.average_evaluation ? 1 : -1));
 
-  useEffect(() => {
-    listResources(learningUnitId);
-  }, [listResources, learningUnitId]);
-
-  if (error) {
-    return <Alert severity="error">Error</Alert>;
-  }
-  if (loading || !data) {
-    return <Loader />;
-  }
-  data.sort((a, b) => b.average_evaluation < a.average_evaluation);
+  const newResourceCreation = () => {
+    mutate();
+  };
 
   return (
     <Container maxWidth="sm">
@@ -28,7 +24,7 @@ export default function ResourcesOfLearningUnit({ learningUnitId }) {
       ))}
       <NewResource
         learningUnitId={learningUnitId}
-        listResources={listResources}
+        newResourceCreation={newResourceCreation}
       />
     </Container>
   );
