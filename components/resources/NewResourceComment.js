@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceCommentForm from "./NewResourceCommentForm";
 
-function NewResourceComment({ resourceId }) {
+function NewResourceComment({ resourceId, newCommentCreation }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,6 +27,7 @@ function NewResourceComment({ resourceId }) {
           <NewResourceCommentForm
             resourceId={resourceId}
             handleClose={handleClose}
+            newCommentCreation={newCommentCreation}
           />
         </Box>
       </Modal>
