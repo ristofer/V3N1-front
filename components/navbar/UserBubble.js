@@ -10,6 +10,7 @@ import {
   MenuItem,
   Skeleton,
 } from "@mui/material";
+import Link from "next/link";
 import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
 import useAuthError from "../../modules/authentication/hooks/use-error";
 import useAuthLoading from "../../modules/authentication/hooks/use-loading";
@@ -38,8 +39,8 @@ function UserBubble() {
     userName = null;
     userId = 0;
     sessionActions = [
-      { text: "Login", url: "users/sign_in" },
-      { text: "Signup", url: "users/sign_up" },
+      { text: "Login", url: "/users/sign_in" },
+      { text: "Signup", url: "/users/sign_up" },
     ];
   } else {
     userName = currentUser.name;
@@ -78,16 +79,16 @@ function UserBubble() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {sessionActions.map((setionAction) => (
-          <MenuItem key={setionAction.text} onClick={handleCloseUserMenu}>
-            {setionAction.url == null ? (
-              <Button onClick={signOut}>
-                <Typography textAlign="center">{setionAction.text}</Typography>
+        {sessionActions.map((sessionAction) => (
+          <MenuItem key={sessionAction.text} onClick={handleCloseUserMenu}>
+            {sessionAction.url == null ? (
+              <Button onClick={signOut} color="error">
+                <Typography textAlign="center">{sessionAction.text}</Typography>
               </Button>
             ) : (
-              <Button href={setionAction.url}>
-                <Typography textAlign="center">{setionAction.text}</Typography>
-              </Button>
+              <Link href={sessionAction.url}>
+                <Typography textAlign="center">{sessionAction.text}</Typography>
+              </Link>
             )}
           </MenuItem>
         ))}
