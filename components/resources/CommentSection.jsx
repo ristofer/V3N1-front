@@ -1,21 +1,20 @@
-import Container from "@mui/material/Container";
-import { useOperation } from "react-openapi-client";
+import { Alert, Container } from "@mui/material";
 import Loader from "../common/Loader";
 import Comment from "./Comment";
+import NewResourceComment from "./NewResourceComment";
+import useFetch from "../../hooks/use-fetch";
 
 function CommentSection({ resourceId }) {
-  const { loading, data, error } = useOperation(
-    "getResourceComments",
-    resourceId
+  const { data, error, mutate } = useFetch(
+    `/api/resources/${resourceId}/resource_comments`
   );
 
-  if (loading) {
-    return <Loader />;
-  }
+  if (error) return <Alert severity="error">Error</Alert>;
+  if (!data) return <Loader />;
 
-  if (error) {
-    return <div>Error</div>;
-  }
+  const newCommentCreation = () => {
+    mutate();
+  };
 
   return (
     <Container maxWidth="sm">
@@ -28,6 +27,10 @@ function CommentSection({ resourceId }) {
           userId={comment.user.id}
         />
       ))}
+      <NewResourceComment
+        resourceId={resourceId}
+        newCommentCreation={newCommentCreation}
+      />
     </Container>
   );
 }
