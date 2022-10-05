@@ -39,8 +39,8 @@ function UserBubble() {
     userName = null;
     userId = 0;
     sessionActions = [
-      { text: "Login", url: "users/sign_in" },
-      { text: "Signup", url: "users/sign_up" },
+      { text: "Login", url: "/users/sign_in" },
+      { text: "Signup", url: "/users/sign_up" },
     ];
   } else {
     userName = currentUser.name;
