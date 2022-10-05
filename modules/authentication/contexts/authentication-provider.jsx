@@ -1,6 +1,6 @@
 import { useOperation, useOperationMethod } from "react-openapi-client";
-import axios from "axios";
 import { useMemo, useCallback } from "react";
+import Router from "next/router";
 import AuthenticationContext from "./authentication-context";
 
 function AuthenticationProvider({ children }) {
@@ -9,11 +9,8 @@ function AuthenticationProvider({ children }) {
 
   const signOut = useCallback(async () => {
     await endSession();
-    if (window.location.pathname === "/") {
-      window.location.reload();
-    } else {
-      axios.get("/");
-    }
+    await Router.push("/");
+    window.location.reload();
   }, [endSession]);
 
   const context = useMemo(
