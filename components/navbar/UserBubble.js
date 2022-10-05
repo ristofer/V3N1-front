@@ -13,21 +13,19 @@ import {
 import Link from "next/link";
 import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
 import useAuthError from "../../modules/authentication/hooks/use-error";
-import useAuthLoading from "../../modules/authentication/hooks/use-loading";
 import useSignOut from "../../modules/authentication/hooks/use-sign-out";
 
 function UserBubble() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const currentUser = useCurrentUser();
   const error = useAuthError();
-  const loading = useAuthLoading();
   const signOut = useSignOut();
 
   let userName = null;
   let userId = 0;
   let sessionActions = {};
 
-  if (loading) {
+  if (currentUser === undefined && error === undefined) {
     return (
       <div>
         <Skeleton variant="circular" width={40} height={40} />
