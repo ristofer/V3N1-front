@@ -28,9 +28,7 @@ function ResourceInformation({ resourceId }) {
     return <div>Error: {error.message}</div>;
   }
 
-  const evaluation = resource.average_evaluation;
-  const average =
-    evaluation === null ? null : parseFloat(evaluation.slice(0, 3));
+  const average = parseFloat(String(resource.average_evaluation).slice(0, 3));
 
   return (
     <Card>
