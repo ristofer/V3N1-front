@@ -16,7 +16,7 @@ function Resource({ resource }) {
   const resourcePath = "/resources/";
 
   return (
-    <Card sx={{ width: 400, height: 80, display: "flex", mb: 2 }}>
+    <Card sx={{ width: 400, display: "flex", m: 2 }}>
       <CardActionArea sx={{ width: 250 }} href={resourcePath + resourceId}>
         <CardContent>
           <Typography variant="h6" component="div" position="center">
