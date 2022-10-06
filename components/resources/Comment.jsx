@@ -11,8 +11,11 @@ const dateFormat = {
   minute: "numeric",
 };
 
-function Comment({ userName, userId, postTime, content }) {
-  const date = new Date(postTime);
+function Comment({ comment }) {
+  const { user, created_at: createdAt, content } = comment;
+  const { name: userName, id: userId } = user;
+  const date = new Date(createdAt);
+
   return (
     <Box sx={{ minWidth: 275, margin: 2 }}>
       <Card variant="outlined">

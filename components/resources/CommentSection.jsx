@@ -17,15 +17,9 @@ function CommentSection({ resourceId }) {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xl">
       {data.map((comment) => (
-        <Comment
-          key={comment.id}
-          userName={comment.user.name}
-          postTime={comment.created_at}
-          content={comment.content}
-          userId={comment.user.id}
-        />
+        <Comment key={comment.id} comment={comment} />
       ))}
       <NewResourceComment
         resourceId={resourceId}
