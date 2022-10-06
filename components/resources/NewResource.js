@@ -1,9 +1,8 @@
-import { OpenAPIProvider } from "react-openapi-client";
 import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceForm from "./NewResourceForm";
 
-function NewResource({ learningUnitId, newResourceCreation }) {
+function NewResource({ onSubmit }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -20,18 +19,20 @@ function NewResource({ learningUnitId, newResourceCreation }) {
   };
 
   return (
-    <OpenAPIProvider definition="/api-docs/v1/swagger.json">
+    <>
       <Button onClick={handleOpen}>New Resource</Button>
       <Modal hideBackdrop open={open} onClose={handleClose}>
-        <Box sx={{ ...style, width: 320 }}>
-          <NewResourceForm
-            learningUnitId={learningUnitId}
-            handleClose={handleClose}
-            newResourceCreation={newResourceCreation}
-          />
+        <Box
+          sx={{
+            ...style,
+            width: 320,
+            "& .MuiTextField-root": { mb: 2, width: "25ch" },
+          }}
+        >
+          <NewResourceForm handleClose={handleClose} onSubmit={onSubmit} />
         </Box>
       </Modal>
-    </OpenAPIProvider>
+    </>
   );
 }
 

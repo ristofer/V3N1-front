@@ -1,11 +1,9 @@
-import { useOperationMethod } from "react-openapi-client";
 import React, { useState, useCallback } from "react";
-import { TextField, Button, Box, Alert, Stack } from "@mui/material";
-import Loader from "../common/Loader";
+import { TextField, Button, Stack } from "@mui/material";
 
-function NewResourceForm({ learningUnitId, handleClose, newResourceCreation }) {
-  const [createResource, { loading, error, data }] =
-    useOperationMethod("createResource");
+function NewResourceForm({ handleClose, onSubmit }) {
+  // const [createResource, { loading, error, data }] =
+  //   useOperationMethod("createResource");
   const [formInput, setContent] = useState({ name: "", url: "http://" });
 
   const handleChange = useCallback((event) => {
@@ -17,53 +15,8 @@ function NewResourceForm({ learningUnitId, handleClose, newResourceCreation }) {
     });
   }, []);
 
-  const handleSubmit = () => {
-    createResource(learningUnitId, {
-      name: formInput.name,
-      url: formInput.url,
-    });
-  };
-
-  if (error) {
-    return (
-      <>
-        <Alert severity="error">
-          Error {error.response.data.code}: {error.response.data.message}
-        </Alert>
-        <Stack>
-          <Button onClick={handleClose}>Close</Button>
-        </Stack>
-      </>
-    );
-  }
-  if (loading) {
-    return <Loader />;
-  }
-  if (data) {
-    return (
-      <>
-        <Alert severity="success">Resource {data.name} created!</Alert>
-        <Stack>
-          <Button
-            align="right"
-            onClick={async () => {
-              handleClose();
-              newResourceCreation();
-            }}
-          >
-            Close
-          </Button>
-        </Stack>
-      </>
-    );
-  }
-
   return (
-    <Box
-      sx={{
-        "& .MuiTextField-root": { mb: 2, width: "25ch" },
-      }}
-    >
+    <>
       <TextField
         required
         type="text"
@@ -86,11 +39,17 @@ function NewResourceForm({ learningUnitId, handleClose, newResourceCreation }) {
         <Button variant="outlined" color="error" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            onSubmit(formInput.name, formInput.url);
+            handleClose();
+          }}
+        >
           Submit
         </Button>
       </Stack>
-    </Box>
+    </>
   );
 }
 
