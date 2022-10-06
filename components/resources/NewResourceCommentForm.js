@@ -1,77 +1,45 @@
-import { useOperationMethod } from "react-openapi-client";
-import React, { useState, useCallback } from "react";
-import { TextField, Button, Alert } from "@mui/material";
-import Loader from "../common/Loader";
+import React from "react";
+import { Stack, TextField, Button } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
-function NewResourceCommentForm({
-  resourceId,
-  handleClose,
-  newCommentCreation,
-}) {
-  const [createResourceComment, { loading, error, data }] = useOperationMethod(
-    "createResourceComment"
-  );
-  const [formInput, setContent] = useState({ content: "" });
+function NewResourceCommentForm({ handleClose, onSubmit }) {
+  const validationSchema = yup.object({
+    content: yup
+      .string("Write a comment")
+      .required("You can't submit an empty comment"),
+  });
 
-  const handleChange = useCallback((event) => {
-    setContent((prevFormInput) => {
-      return {
-        ...prevFormInput,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }, []);
-
-  const handleSubmit = () => {
-    createResourceComment(resourceId, { content: formInput.content });
-  };
-
-  if (error) {
-    return (
-      <>
-        <Alert severity="error">
-          Error {error.response.data.code}: {error.response.data.message}
-        </Alert>
-        <Button onClick={handleClose}>Close</Button>
-      </>
-    );
-  }
-  if (loading) {
-    return <Loader />;
-  }
-  if (data) {
-    return (
-      <>
-        <Alert severity="success">Comment created: {data.content}</Alert>
-        <Button
-          onClick={async () => {
-            handleClose();
-            newCommentCreation();
-          }}
-        >
-          Close
-        </Button>
-      </>
-    );
-  }
+  const formik = useFormik({
+    initialValues: {
+      content: "",
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      onSubmit(values.content);
+      handleClose();
+    },
+  });
 
   return (
-    <>
+    <form onSubmit={formik.handleSubmit}>
       <TextField
-        required
         type="text"
         id="content"
         name="content"
         label="Write your comment"
         multiline
         maxRows={4}
-        onChange={handleChange}
-        value={formInput.content}
+        value={formik.values.content}
+        onChange={formik.handleChange}
+        error={formik.touched.content && Boolean(formik.errors.content)}
+        helperText={formik.touched.content && formik.errors.content}
       />
-      <br />
-      <Button onClick={handleSubmit}>Submit</Button>
-      <Button onClick={handleClose}>Cancel</Button>
-    </>
+      <Stack direction="row" spacing={10}>
+        <Button type="submit">Submit</Button>
+        <Button onClick={handleClose}>Cancel</Button>
+      </Stack>
+    </form>
   );
 }
 
