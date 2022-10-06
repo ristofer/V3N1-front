@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, IconButton, Typography, Menu, MenuItem } from "@mui/material";
+import { Box, Button, IconButton, Menu } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function MobileMenu({ pages }) {
@@ -44,13 +44,9 @@ function MobileMenu({ pages }) {
         }}
       >
         {pages.map((page) => (
-          <MenuItem
-            key={page.text}
-            onClick={handleCloseNavMenu}
-            href={page.url}
-          >
-            <Typography textAlign="center">{page.text}</Typography>
-          </MenuItem>
+          <Button key={page.text} onClick={handleCloseNavMenu} href={page.url}>
+            {page.text}
+          </Button>
         ))}
       </Menu>
     </Box>

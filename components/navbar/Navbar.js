@@ -4,7 +4,7 @@ import UserBubble from "./UserBubble";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 
-const pages = [{ text: "Home", url: "/landing" }];
+const pages = [{ text: "Curriculum 1", url: "/curriculums/1" }];
 
 function Navbar() {
   return (
