@@ -1,6 +1,7 @@
 import { Typography, Alert, Card, CardContent } from "@mui/material";
 import Loader from "../common/Loader";
 import useFetch from "../../hooks/use-fetch";
+import PreviousPage from "../common/PreviousPage";
 
 export default function LearningUnitInformation({ learningUnitId }) {
   const { data: learningUnit, error } = useFetch(
@@ -18,6 +19,7 @@ export default function LearningUnitInformation({ learningUnitId }) {
   return (
     <Card>
       <CardContent>
+        <PreviousPage textButton="Go to curriculum" />
         <Typography variant="h2" component="div">
           {learningUnit.name}
         </Typography>
