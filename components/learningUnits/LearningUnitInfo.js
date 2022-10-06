@@ -16,10 +16,12 @@ export default function LearningUnitInformation({ learningUnitId }) {
     return <Alert severity="error">Error</Alert>;
   }
 
+  const goBackPageText = "Back to curriculum";
+
   return (
     <Card>
       <CardContent>
-        <PreviousPage textButton="Go to curriculum" />
+        <PreviousPage goBackText={goBackPageText} />
         <Typography variant="h2" component="div">
           {learningUnit.name}
         </Typography>
