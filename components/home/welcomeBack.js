@@ -10,7 +10,7 @@ function WelcomeBack({ userName }) {
       </p>
 
       <div className={styles.grid}>
-        <a href="/users/sign_in" className={styles.card}>
+        <a href="/curriculums/1" className={styles.card}>
           <h2>Resume &rarr;</h2>
           <p>Ready to continue? Resume your learning journey here.</p>
         </a>
