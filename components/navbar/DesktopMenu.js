@@ -1,12 +1,6 @@
-import { useState } from "react";
 import { Box, Button } from "@mui/material";
 
 function DesktopMenu({ pages }) {
-  const [setAnchorElNav] = useState(null);
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
   return (
     <Box
       sx={{
@@ -18,7 +12,6 @@ function DesktopMenu({ pages }) {
       {pages.map((page) => (
         <Button
           key={page.text}
-          onClick={handleCloseNavMenu}
           href={page.url}
           sx={{ my: 2, color: "white", display: "block", mx: 1 }}
         >
