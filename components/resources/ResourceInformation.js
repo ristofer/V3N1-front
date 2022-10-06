@@ -1,63 +1,51 @@
-import { useOperation } from "react-openapi-client";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import Chip from "@mui/material/Chip";
-import Rating from "@mui/material/Rating";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { Box, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
+import { useOperationMethod } from "react-openapi-client";
+import useFetch from "../../hooks/use-fetch";
+import Loader from "../common/Loader";
+import ResourceDisplay from "./ResourceDisplay";
 import UserRating from "./UserRating";
 
 function ResourceInformation({ resourceId }) {
   const {
-    loading,
-    data: resource,
+    data,
     error,
-  } = useOperation("getResource", resourceId);
+    mutate: mutateResource,
+  } = useFetch(`/api/resources/${resourceId}`);
 
-  if (loading) {
-    return (
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress />
-      </Box>
-    );
+  const {
+    data: evaluationData,
+    error: evaluationError,
+    mutate,
+  } = useFetch(`/api/resources/${resourceId}/resource_evaluation`);
+
+  const [setResourceEvaluation] = useOperationMethod("setResourceEvaluation");
+
+  async function handleRatingChange(body) {
+    await setResourceEvaluation(resourceId, body);
+    await mutate();
+    await mutateResource();
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  if (error || evaluationError) return <Alert severity="error">Error</Alert>;
+  if (!data || !evaluationData) return <Loader />;
 
-  const average = parseFloat(String(resource.average_evaluation).slice(0, 3));
+  data.average_evaluation = parseFloat(
+    String(data.average_evaluation).slice(0, 3)
+  );
+
+  const { evaluation: userEvaluation } = evaluationData;
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {resource.name}
-        </Typography>
-
-        <Rating
-          id="resource-average"
-          name="read-only"
-          value={average}
-          precision={0.1}
-          readOnly
-        />
-
-        <Chip label={average} variant="outlined" />
-
-        <CardActions>
-          <Button href={resource.url} target="_blank" variant="outlined">
-            Ver recurso
-          </Button>
-        </CardActions>
-
-        <Typography component="div">Your evaluation</Typography>
-
-        <UserRating resourceId={resourceId} />
-      </CardContent>
-    </Card>
+    <>
+      <ResourceDisplay resource={data} />
+      <UserRating
+        evaluation={userEvaluation}
+        setEvaluation={async (body) => {
+          handleRatingChange(body);
+        }}
+      />
+    </>
   );
 }
+
 export default ResourceInformation;

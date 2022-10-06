@@ -1,20 +1,20 @@
-import { useOperation } from "react-openapi-client";
-import Rating from "@mui/material/Rating";
+import { Rating, Typography } from "@mui/material";
 
-function UserRating({ resourceId }) {
-  const { loading, data, error } = useOperation(
-    "getResourceEvaluation",
-    resourceId
+function UserRating({ evaluation, setEvaluation }) {
+  return (
+    <>
+      <Typography variant="h5" mt={2} mb={1}>
+        Your evaluation
+      </Typography>
+      <Rating
+        name="simple-controlled-d"
+        value={evaluation}
+        onChange={(event, newValue) => {
+          setEvaluation({ evaluation: newValue });
+        }}
+      />
+    </>
   );
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  return <Rating name="simple-controlled-d" value={data.evaluation} />;
 }
+
 export default UserRating;
