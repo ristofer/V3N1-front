@@ -18,7 +18,7 @@ function AuthenticationProvider({ children }) {
       await router.push("/landing");
     }
     window.location.reload();
-  }, [endSession]);
+  }, [endSession, error, router]);
 
   const context = useMemo(
     () => ({
