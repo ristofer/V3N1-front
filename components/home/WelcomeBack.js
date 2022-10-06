@@ -21,8 +21,8 @@ function WelcomeBack({ userName }) {
           color: "inherit",
           fontSize: 23,
           textAlign: "center",
-          mt: 5,
-          mb: 10,
+          mt: 3,
+          mb: 7,
         }}
       >
         Your path towards your next career as a software developer awaits

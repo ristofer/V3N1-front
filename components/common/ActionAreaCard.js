@@ -8,7 +8,7 @@ import {
 
 function ActionAreaCard({ imageurl, url, imagealt, title, text }) {
   return (
-    <Card sx={{ maxWidth: 345, ml: 2, mr: 2 }}>
+    <Card sx={{ maxWidth: 345, m: 2 }}>
       <CardActionArea href={url}>
         <CardMedia
           component="img"

@@ -12,7 +12,7 @@ function WelcomeUnknown() {
   };
   return (
     <main className={styles.main}>
-      <Typography sx={titleStyle}>Welcome back to Paraffin,</Typography>
+      <Typography sx={titleStyle}>Welcome to Paraffin</Typography>
       <Typography sx={titleStyle}>by V3N1</Typography>
 
       <Typography
@@ -21,8 +21,8 @@ function WelcomeUnknown() {
           color: "inherit",
           fontSize: 23,
           textAlign: "center",
-          mt: 5,
-          mb: 10,
+          mt: 3,
+          mb: 7,
         }}
       >
         Discover your next career as a software developer
