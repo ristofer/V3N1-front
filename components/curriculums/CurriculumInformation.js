@@ -1,15 +1,13 @@
 import { Typography, Alert, Card, CardContent } from "@mui/material";
-import { useOperation } from "react-openapi-client";
 import Loader from "../common/Loader";
+import useFetch from "../../hooks/use-fetch";
 
 export default function CurriculumInformation({ curriculumId }) {
-  const {
-    loading,
-    data: curriculum,
-    error,
-  } = useOperation("getCurriculum", curriculumId);
+  const { data: curriculum, error } = useFetch(
+    `/api/curriculums/${curriculumId}`
+  );
 
-  if (loading) {
+  if (!curriculum) {
     return <Loader />;
   }
 

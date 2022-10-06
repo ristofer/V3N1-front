@@ -1,15 +1,13 @@
 import { Typography, Alert, Card, CardContent } from "@mui/material";
-import { useOperation } from "react-openapi-client";
 import Loader from "../common/Loader";
+import useFetch from "../../hooks/use-fetch";
 
 export default function LearningUnitInformation({ learningUnitId }) {
-  const {
-    loading,
-    data: learningUnit,
-    error,
-  } = useOperation("getLearningUnit", learningUnitId);
+  const { data: learningUnit, error } = useFetch(
+    `/api/learning_units/${learningUnitId}`
+  );
 
-  if (loading) {
+  if (!learningUnit) {
     return <Loader />;
   }
 
