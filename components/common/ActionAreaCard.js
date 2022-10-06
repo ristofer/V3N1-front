@@ -5,7 +5,7 @@ import {
   Typography,
   CardActionArea,
 } from "@mui/material";
-import Link from "next/Link";
+import Link from "next/link";
 
 function ActionAreaCard({ imageurl, url, imagealt, title, text }) {
   return (
