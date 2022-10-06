@@ -4,7 +4,7 @@ import WelcomeUnknown from "./welcomeUnknown";
 import WelcomeBack from "./welcomeBack";
 import WelcomeSkeleton from "./welcomeSkeleton";
 
-function LandingContent() {
+function HomeContent() {
   const currentUser = useCurrentUser();
   const error = useAuthError();
   if (currentUser === undefined && error === undefined) {
@@ -18,4 +18,4 @@ function LandingContent() {
   return <WelcomeBack userName={currentUser.name} />;
 }
 
-export default LandingContent;
+export default HomeContent;
