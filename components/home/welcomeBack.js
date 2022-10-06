@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 
 function WelcomeBack({ userName }) {
@@ -10,10 +11,10 @@ function WelcomeBack({ userName }) {
       </p>
 
       <div className={styles.grid}>
-        <a href="/curriculums/1" className={styles.card}>
+        <Link href="/curriculums/1" className={styles.card}>
           <h2>Resume &rarr;</h2>
           <p>Ready to continue? Resume your learning journey here.</p>
-        </a>
+        </Link>
       </div>
     </main>
   );
