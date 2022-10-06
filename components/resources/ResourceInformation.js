@@ -35,7 +35,9 @@ function ResourceInformation({ resourceId }) {
       <ResourceDisplay resource={data} />
       <UserRating
         evaluation={userEvaluation}
-        setEvaluation={()=>handleRatingChange}
+        setEvaluation={async (body) => {
+          handleRatingChange(body);
+        }}
       />
     </>
   );
