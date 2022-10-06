@@ -1,53 +1,59 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { TextField, Button, Stack } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 function NewResourceForm({ handleClose, onSubmit }) {
-  const [formInput, setContent] = useState({ name: "", url: "http://" });
+  const validationSchema = yup.object({
+    name: yup
+      .string("Enter a name")
+      .required("You can't submit a resource without a name"),
+    url: yup.string().url("You must enter a valid URL").nullable(),
+  });
 
-  const handleChange = useCallback((event) => {
-    setContent((prevFormInput) => {
-      return {
-        ...prevFormInput,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }, []);
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      url: "http://",
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      onSubmit(values.name, values.url);
+      handleClose();
+    },
+  });
 
   return (
-    <>
+    <form onSubmit={formik.handleSubmit}>
       <TextField
-        required
         type="text"
         id="name"
         name="name"
         label="Name your resource"
-        onChange={handleChange}
-        value={formInput.name}
+        value={formik.values.name}
+        onChange={formik.handleChange}
+        error={formik.touched.name && Boolean(formik.errors.name)}
+        helperText={formik.touched.name && formik.errors.name}
       />
       <TextField
-        required
         type="text"
         id="url"
         name="url"
         label="Write the url of your resource"
-        onChange={handleChange}
-        value={formInput.url}
+        value={formik.values.url}
+        onChange={formik.handleChange}
+        error={formik.touched.url && Boolean(formik.errors.url)}
+        helperText={formik.touched.url && formik.errors.url}
       />
       <Stack direction="row" spacing={10}>
         <Button variant="outlined" color="error" onClick={handleClose}>
           Cancel
         </Button>
-        <Button
-          variant="contained"
-          onClick={() => {
-            onSubmit(formInput.name, formInput.url);
-            handleClose();
-          }}
-        >
+        <Button variant="contained" type="submit">
           Submit
         </Button>
       </Stack>
-    </>
+    </form>
   );
 }
 
