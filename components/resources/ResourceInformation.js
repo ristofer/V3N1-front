@@ -16,6 +16,11 @@ function ResourceInformation({ resourceId }) {
 
   const [setResourceEvaluation] = useOperationMethod("setResourceEvaluation");
 
+  async function handleRatingChange(body) {
+    await setResourceEvaluation(resourceId, body);
+    mutate();
+  }
+
   if (error || evaluationError) return <Alert severity="error">Error</Alert>;
   if (!data || !evaluationData) return <Loader />;
 
@@ -30,10 +35,7 @@ function ResourceInformation({ resourceId }) {
       <ResourceDisplay resource={data} />
       <UserRating
         evaluation={userEvaluation}
-        setEvaluation={(body) => {
-          setResourceEvaluation(resourceId, body);
-          mutate();
-        }}
+        setEvaluation={()=>handleRatingChange}
       />
     </>
   );
