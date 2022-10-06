@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, IconButton, Typography, Menu, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
 
 function MobileMenu({ pages, loggedIn }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -51,15 +52,15 @@ function MobileMenu({ pages, loggedIn }) {
           }}
         >
           {pages.map((page) => (
-            <Button
-              key={page.text}
-              disabled={!loggedIn}
-              onClick={handleCloseNavMenu}
-              href={page.url}
-              style={{ justifyContent: "flex-start" }}
-            >
-              <Typography textAlign="center">{page.text}</Typography>
-            </Button>
+            <Link href={page.url} passHref key={page.text}>
+              <Button
+                disabled={!loggedIn}
+                onClick={handleCloseNavMenu}
+                style={{ justifyContent: "flex-start" }}
+              >
+                <Typography textAlign="center">{page.text}</Typography>
+              </Button>
+            </Link>
           ))}
         </Box>
       </Menu>

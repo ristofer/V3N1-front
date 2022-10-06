@@ -1,4 +1,5 @@
 import { Box, Button } from "@mui/material";
+import Link from "next/link";
 
 function DesktopMenu({ pages, loggedIn }) {
   return (
@@ -10,14 +11,14 @@ function DesktopMenu({ pages, loggedIn }) {
       }}
     >
       {pages.map((page) => (
-        <Button
-          key={page.text}
-          disabled={!loggedIn}
-          href={page.url}
-          sx={{ my: 2, color: "white", display: "block", mx: 1 }}
-        >
-          {page.text}
-        </Button>
+        <Link href={page.url} passHref key={page.text}>
+          <Button
+            disabled={!loggedIn}
+            sx={{ my: 2, color: "white", display: "block", mx: 1 }}
+          >
+            {page.text}
+          </Button>
+        </Link>
       ))}
     </Box>
   );
