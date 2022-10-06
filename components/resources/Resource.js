@@ -6,7 +6,7 @@ import {
   CardActions,
   Rating,
 } from "@mui/material";
-import Link from "next/Link";
+import Link from "next/link";
 
 function Resource({ resource }) {
   const {

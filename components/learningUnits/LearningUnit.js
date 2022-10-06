@@ -6,7 +6,7 @@ import {
   CardActions,
   Checkbox,
 } from "@mui/material";
-import Link from "next/Link";
+import Link from "next/link";
 
 function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
   const learningUnitsPath = "/learningUnits/";
