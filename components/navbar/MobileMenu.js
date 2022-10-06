@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, IconButton, Typography, Menu, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-function MobileMenu({ pages }) {
+function MobileMenu({ pages, loggedIn }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -53,6 +53,7 @@ function MobileMenu({ pages }) {
           {pages.map((page) => (
             <Button
               key={page.text}
+              disabled={!loggedIn}
               onClick={handleCloseNavMenu}
               href={page.url}
               style={{ justifyContent: "flex-start" }}

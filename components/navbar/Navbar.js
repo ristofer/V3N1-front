@@ -5,8 +5,10 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import useFetch from "../../hooks/use-fetch";
 import Loader from "../common/Loader";
+import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
 
 function Navbar() {
+  const currentUser = useCurrentUser();
   const { data, error } = useFetch(`/api/curriculums`);
   if (error || !data) return <Loader />;
   const pages = data
@@ -24,13 +26,13 @@ function Navbar() {
             variant="h6"
             flexGrow={0}
           />
-          <MobileMenu pages={pages} />
+          <MobileMenu pages={pages} loggedIn={!!currentUser} />
           <AppTitleAndLogo
             display={{ xs: "flex", md: "none" }}
             variant="h5"
             flexGrow={1}
           />
-          <DesktopMenu pages={pages} />
+          <DesktopMenu pages={pages} loggedIn={!!currentUser} />
           <UserBubble />
         </Toolbar>
       </Container>
