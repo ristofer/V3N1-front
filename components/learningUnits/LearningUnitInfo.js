@@ -2,12 +2,12 @@ import { Typography, Alert, Card, CardContent } from "@mui/material";
 import { useOperation } from "react-openapi-client";
 import Loader from "../common/Loader";
 
-export default function CurriculumInformation({ curriculumId }) {
+export default function LearningUnitInformation({ learningUnitId }) {
   const {
     loading,
-    data: curriculum,
+    data: learningUnit,
     error,
-  } = useOperation("getCurriculum", curriculumId);
+  } = useOperation("getLearningUnit", learningUnitId);
 
   if (loading) {
     return <Loader />;
@@ -21,7 +21,7 @@ export default function CurriculumInformation({ curriculumId }) {
     <Card>
       <CardContent>
         <Typography variant="h2" component="div">
-          {curriculum.name}
+          {learningUnit.name}
         </Typography>
       </CardContent>
     </Card>
