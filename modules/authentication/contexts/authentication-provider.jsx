@@ -14,8 +14,8 @@ function AuthenticationProvider({ children }) {
     if (error === undefined) {
       await endSession();
     }
-    if (router.pathname !== "/landing") {
-      await router.push("/landing");
+    if (router.pathname !== "/") {
+      await router.push("/");
     }
     window.location.reload();
   }, [endSession, error, router]);
