@@ -11,7 +11,7 @@ function WelcomeUnknown() {
     textAlign: "center",
   };
   return (
-    <main>
+    <main className={styles.main}>
       <Typography sx={titleStyle}>Welcome back to Paraffin,</Typography>
       <Typography sx={titleStyle}>by V3N1</Typography>
 
