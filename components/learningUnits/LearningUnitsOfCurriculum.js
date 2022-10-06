@@ -1,29 +1,30 @@
 import React from "react";
-import { useOperation } from "react-openapi-client";
+import { useOperationMethod } from "react-openapi-client";
 import { Alert, Container } from "@mui/material";
 import Loader from "../common/Loader";
 import LearningUnit from "./LearningUnit";
+import useFetch from "../../hooks/use-fetch";
 
 export default function LearningUnitsOfCurriculum({ curriculumId }) {
-  const {
-    loading: completedLoading,
-    error: completedError,
-    data: completedData,
-  } = useOperation(
-    "listCompletedLearningUnitsOfCurriculumCompletedByUser",
-    curriculumId
+  const [completeLearningUnit] = useOperationMethod("completeLearningUnit");
+  const [uncompleteLearningUnit] = useOperationMethod(
+    "uncompleteLearningUnitForUser"
+  );
+
+  const { data: learningUnitsData, error: learningUnitsError } = useFetch(
+    `/api/curriculums/${curriculumId}/learning_units`
   );
 
   const {
-    loading: learningUnitsLoading,
-    data: learningUnitsData,
-    error: learningUnitsError,
-  } = useOperation("listLearningUnitsOfCurriculum", curriculumId);
+    data: completedData,
+    error: completedError,
+    mutate,
+  } = useFetch(`/api/curriculums/${curriculumId}/completed_learning_units`);
 
   if (learningUnitsError || completedError) {
     return <Alert severity="error">Error</Alert>;
   }
-  if (learningUnitsLoading || completedLoading) {
+  if (!learningUnitsData || !completedData) {
     return <Loader />;
   }
 
@@ -31,6 +32,14 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
     (completedLearningUnit) => completedLearningUnit.learning_unit_id
   );
 
+  const onCheck = async (isPreviouslyCompleted, learningUnitId) => {
+    if (isPreviouslyCompleted) {
+      await uncompleteLearningUnit(learningUnitId);
+    } else {
+      await completeLearningUnit(learningUnitId);
+    }
+    mutate();
+  };
   return (
     <Container maxWidth="sm">
       {learningUnitsData.map((learningUnit) => (
@@ -40,6 +49,7 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
           isPreviouslyCompleted={completedLearningUnits.includes(
             learningUnit.id
           )}
+          onCheck={onCheck}
         />
       ))}
     </Container>
