@@ -3,10 +3,18 @@ import AppTitleAndLogo from "./AppTitleAndLogo";
 import UserBubble from "./UserBubble";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-
-const pages = [{ text: "Curriculum 1", url: "/curriculums/1" }];
+import useFetch from "../../hooks/use-fetch";
+import Loader from "../common/Loader";
 
 function Navbar() {
+  const { data, error } = useFetch(`/api/curriculums`);
+  if (error || !data) return <Loader />;
+  const pages = data
+    .map((curriculum) => ({
+      text: curriculum.name,
+      url: `/curriculums/${curriculum.id}`,
+    }))
+    .slice(0, 3);
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -29,4 +37,5 @@ function Navbar() {
     </AppBar>
   );
 }
+
 export default Navbar;
