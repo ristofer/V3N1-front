@@ -4,26 +4,26 @@ import {
   Typography,
   CardActionArea,
   CardActions,
+  Checkbox,
 } from "@mui/material";
-import LearningUnitCheckbox from "./LearningUnitCheckbox";
 
-function LearningUnit({ learningUnit, isPreviouslyCompleted }) {
-  const { id: learningUnitId, name } = learningUnit;
-  const learningUnitPath = "/learningUnits/";
+function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
+  const learningUnitsPath = "/learningUnits/";
+  const { id: learningUnitId, name: learningUnitName } = learningUnit;
 
   return (
-    <Card sx={{ maxWidth: 345, display: "flex", m: 2 }}>
-      <CardActionArea href={learningUnitPath + learningUnitId}>
+    <Card sx={{ maxWidth: "xl", display: "flex", m: 2 }}>
+      <CardActionArea href={learningUnitsPath + learningUnitId}>
         <CardContent>
           <Typography variant="h4" component="div" position="center">
-            {name}
+            {learningUnitName}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <LearningUnitCheckbox
-          learningUnitId={learningUnitId}
-          isPreviouslyCompleted={isPreviouslyCompleted}
+        <Checkbox
+          checked={isPreviouslyCompleted}
+          onChange={() => onCheck(isPreviouslyCompleted, learningUnitId)}
         />
       </CardActions>
     </Card>
