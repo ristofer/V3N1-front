@@ -9,7 +9,7 @@ function AppTitleAndLogo({ display, variant, flexGrow }) {
         variant={variant}
         noWrap
         component="a"
-        href="/landing"
+        href="/"
         sx={{
           mr: 2,
           display,
