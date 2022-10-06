@@ -1,8 +1,8 @@
 import useCurrentUser from "../../modules/authentication/hooks/use-current-user";
 import useAuthError from "../../modules/authentication/hooks/use-error";
-import WelcomeUnknown from "./SwelcomeUnknown";
-import WelcomeBack from "./SwelcomeBack";
-import WelcomeSkeleton from "./SwelcomeSkeleton";
+import WelcomeUnknown from "./WelcomeUnknown";
+import WelcomeBack from "./WelcomeBack";
+import WelcomeSkeleton from "./WelcomeSkeleton";
 
 function HomeContent() {
   const currentUser = useCurrentUser();
