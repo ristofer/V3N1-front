@@ -2,8 +2,6 @@ import React, { useState, useCallback } from "react";
 import { TextField, Button, Stack } from "@mui/material";
 
 function NewResourceForm({ handleClose, onSubmit }) {
-  // const [createResource, { loading, error, data }] =
-  //   useOperationMethod("createResource");
   const [formInput, setContent] = useState({ name: "", url: "http://" });
 
   const handleChange = useCallback((event) => {
