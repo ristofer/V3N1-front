@@ -1,5 +1,5 @@
-import Link from "next/link";
 import styles from "../../styles/Home.module.css";
+import ActionAreaCard from "../common/ActionAreaCard";
 
 function WelcomeBack({ userName }) {
   return (
@@ -11,10 +11,13 @@ function WelcomeBack({ userName }) {
       </p>
 
       <div className={styles.grid}>
-        <Link href="/curriculums/1" className={styles.card}>
-          <h2>Resume &rarr;</h2>
-          <p>Ready to continue? Resume your learning journey here.</p>
-        </Link>
+        <ActionAreaCard
+          title="Resume"
+          text="Ready to continue? Resume your learning journey here."
+          url="/curriculums/1"
+          imageurl="/images/continue.jpg"
+          imagealt="open book"
+        />
       </div>
     </main>
   );

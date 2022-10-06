@@ -1,4 +1,5 @@
 import styles from "../../styles/Home.module.css";
+import ActionAreaCard from "../common/ActionAreaCard";
 
 function WelcomeUnknown() {
   return (
@@ -10,17 +11,21 @@ function WelcomeUnknown() {
       </p>
 
       <div className={styles.grid}>
-        <a href="/users/sign_up" className={styles.card}>
-          <h2>Sign up &rarr;</h2>
-          <p>
-            You couldn&apos;t have found a better place to start your career.
-          </p>
-        </a>
+        <ActionAreaCard
+          title="Sign up"
+          text="You couldn't have found a better place to start your career."
+          url="/users/sign_up"
+          imageurl="/images/signup.jpg"
+          imagealt="open book"
+        />
 
-        <a href="/users/sign_in" className={styles.card}>
-          <h2>Log in &rarr;</h2>
-          <p>Already have an account? Continue your learning journey here.</p>
-        </a>
+        <ActionAreaCard
+          title="Log in"
+          text="Already have an account? Continue your learning journey here."
+          url="/users/sign_in"
+          imageurl="/images/login.jpg"
+          imagealt="open book"
+        />
       </div>
     </main>
   );
