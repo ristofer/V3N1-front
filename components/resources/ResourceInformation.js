@@ -6,7 +6,11 @@ import ResourceDisplay from "./ResourceDisplay";
 import UserRating from "./UserRating";
 
 function ResourceInformation({ resourceId }) {
-  const { data, error } = useFetch(`/api/resources/${resourceId}`);
+  const {
+    data,
+    error,
+    mutate: mutateResource,
+  } = useFetch(`/api/resources/${resourceId}`);
 
   const {
     data: evaluationData,
@@ -18,7 +22,8 @@ function ResourceInformation({ resourceId }) {
 
   async function handleRatingChange(body) {
     await setResourceEvaluation(resourceId, body);
-    mutate();
+    await mutate();
+    await mutateResource();
   }
 
   if (error || evaluationError) return <Alert severity="error">Error</Alert>;
