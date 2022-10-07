@@ -16,10 +16,11 @@ export default function ResourcesOfLearningUnit({ learningUnitId }) {
   if (!data) return <Loader />;
   data.sort((a, b) => (b.average_evaluation > a.average_evaluation ? 1 : -1));
 
-  const onSubmit = async (name, url) => {
+  const onSubmit = async (name, url, description) => {
     await createResource(learningUnitId, {
       name,
       url,
+      description,
     });
     mutate();
   };
