@@ -26,14 +26,13 @@ function ResourceInformation({ resourceId }) {
     await mutateResource();
   }
 
-  if (error || evaluationError) return <Alert severity="error">Error</Alert>;
-  if (!data || !evaluationData) return <Loader />;
+  if (error) return <Alert severity="error">Error</Alert>;
+  if (!data) return <Loader />;
 
   data.average_evaluation = parseFloat(
     String(data.average_evaluation).slice(0, 3)
   );
-
-  const { evaluation: userEvaluation } = evaluationData;
+  const userEvaluation = evaluationData ? evaluationData.evaluation : null;
 
   return (
     <>
