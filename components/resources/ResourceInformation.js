@@ -12,11 +12,9 @@ function ResourceInformation({ resourceId }) {
     mutate: mutateResource,
   } = useFetch(`/api/resources/${resourceId}`);
 
-  const {
-    data: evaluationData,
-    error: evaluationError,
-    mutate,
-  } = useFetch(`/api/resources/${resourceId}/resource_evaluation`);
+  const { data: evaluationData, mutate } = useFetch(
+    `/api/resources/${resourceId}/resource_evaluation`
+  );
 
   const [setResourceEvaluation] = useOperationMethod("setResourceEvaluation");
 
@@ -26,14 +24,13 @@ function ResourceInformation({ resourceId }) {
     await mutateResource();
   }
 
-  if (error || evaluationError) return <Alert severity="error">Error</Alert>;
-  if (!data || !evaluationData) return <Loader />;
+  if (error) return <Alert severity="error">Error</Alert>;
+  if (!data) return <Loader />;
 
   data.average_evaluation = parseFloat(
     String(data.average_evaluation).slice(0, 3)
   );
-
-  const { evaluation: userEvaluation } = evaluationData;
+  const userEvaluation = evaluationData ? evaluationData.evaluation : null;
 
   return (
     <>
