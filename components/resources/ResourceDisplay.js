@@ -16,25 +16,54 @@ function ResourceDisplay({ resource }) {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            padding: "0 !important",
+            ml: -2.6,
           }}
         >
-          <Typography variant="h5" component="div">
+          <Typography variant="subtitle1" align="left" color="textSecondary">
+            <i>Resource</i>
+          </Typography>
+        </Container>
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            ml: -2.6,
+            mb: 2,
+          }}
+        >
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{ justifyContent: "flex-start" }}
+          >
             {resource.name}
           </Typography>
           <PreviousPage goBackText="Back to Learning Unit" />
         </Container>
-
         <Rating
           id="resource-average"
           name="read-only"
           value={resource.average_evaluation}
           precision={0.1}
           readOnly
+          disabled
         />
-
-        <Chip label={resource.average_evaluation} variant="outlined" />
-
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            ml: -2.6,
+            my: 2,
+          }}
+        >
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ justifyContent: "flex-start" }}
+          >
+            {resource.description}
+          </Typography>
+        </Container>
         <CardActions>
           <Button href={resource.url} target="_blank" variant="outlined">
             Go to website
