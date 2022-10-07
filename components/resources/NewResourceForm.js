@@ -9,16 +9,18 @@ function NewResourceForm({ handleClose, onSubmit }) {
       .string("Enter a name")
       .required("You can't submit a resource without a name"),
     url: yup.string().url("You must enter a valid URL").nullable(),
+    description: yup.string("Write a description").nullable(),
   });
 
   const formik = useFormik({
     initialValues: {
       name: "",
       url: "http://",
+      description: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      onSubmit(values.name, values.url);
+      onSubmit(values.name, values.url, values.description);
       handleClose();
     },
   });
@@ -44,6 +46,16 @@ function NewResourceForm({ handleClose, onSubmit }) {
         onChange={formik.handleChange}
         error={formik.touched.url && Boolean(formik.errors.url)}
         helperText={formik.touched.url && formik.errors.url}
+      />
+      <TextField
+        type="text"
+        id="description"
+        name="description"
+        label="Write the description of your resource"
+        value={formik.values.description}
+        onChange={formik.handleChange}
+        error={formik.touched.description && Boolean(formik.errors.description)}
+        helperText={formik.touched.description && formik.errors.description}
       />
       <Stack direction="row" spacing={10}>
         <Button variant="outlined" color="error" onClick={handleClose}>
