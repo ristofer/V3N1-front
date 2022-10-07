@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import Link from "next/link";
 
-function DesktopMenu({ pages, loggedIn }) {
+function DesktopMenu({ loggedIn, pages }) {
   return (
     <Box
       sx={{

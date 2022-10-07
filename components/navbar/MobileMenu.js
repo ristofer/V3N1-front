@@ -3,7 +3,7 @@ import { Box, IconButton, Typography, Menu, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 
-function MobileMenu({ pages, loggedIn }) {
+function MobileMenu({ loggedIn, pages }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {

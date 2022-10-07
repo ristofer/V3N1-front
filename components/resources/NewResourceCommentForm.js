@@ -1,5 +1,6 @@
 import React from "react";
 import { Stack, TextField, Button } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -24,20 +25,26 @@ function NewResourceCommentForm({ handleClose, onSubmit }) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <TextField
+        fullWidth
         type="text"
         id="content"
         name="content"
         label="Write your comment"
+        size="normal"
         multiline
-        maxRows={4}
+        rows={4}
         value={formik.values.content}
         onChange={formik.handleChange}
         error={formik.touched.content && Boolean(formik.errors.content)}
         helperText={formik.touched.content && formik.errors.content}
       />
-      <Stack direction="row" spacing={10}>
-        <Button type="submit">Submit</Button>
-        <Button onClick={handleClose}>Cancel</Button>
+      <Stack direction="row" spacing={8} mt={3}>
+        <Button onClick={handleClose} variant="outlined" color="error">
+          Cancel
+        </Button>
+        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+          Send
+        </Button>
       </Stack>
     </form>
   );
