@@ -1,19 +1,10 @@
 import { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Typography,
-  Menu,
-  Button,
-  Skeleton,
-} from "@mui/material";
+import { Box, IconButton, Typography, Menu, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import useCurriculums from "../../hooks/use-curriculums";
 
-function MobileMenu({ loggedIn }) {
+function MobileMenu({ loggedIn, pages }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const pages = useCurriculums();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -22,17 +13,6 @@ function MobileMenu({ loggedIn }) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  if (pages === undefined) {
-    return (
-      <Skeleton
-        variant="rounded"
-        width={40}
-        height={30}
-        sx={{ flexGrow: 1, display: { md: "none" }, mr: 20 }}
-      />
-    );
-  }
 
   return (
     <Box sx={{ flexGrow: 1, display: { md: "none" } }}>
