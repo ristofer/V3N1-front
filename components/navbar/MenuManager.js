@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 
-export default function MenuManager({ version, loggedIn, pages }) {
+function MenuManager({ version, loggedIn, pages }) {
   if (version === "desktop") {
     if (pages === undefined) {
       return (
@@ -35,3 +35,5 @@ export default function MenuManager({ version, loggedIn, pages }) {
     return <MobileMenu loggedIn={loggedIn} pages={pages} />;
   }
 }
+
+export default MenuManager;
