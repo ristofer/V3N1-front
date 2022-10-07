@@ -5,7 +5,7 @@ const useCurriculums = () => {
 
   if (error || !data) return undefined;
   const curriculums = data
-    ?.map((curriculum) => ({
+    .map((curriculum) => ({
       text: curriculum.name,
       url: `/curriculums/${curriculum.id}`,
     }))
