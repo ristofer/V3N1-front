@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField, Button, Stack } from "@mui/material";
 import { useFormik } from "formik";
+import SendIcon from "@mui/icons-material/Send";
 import * as yup from "yup";
 
 function NewResourceForm({ handleClose, onSubmit }) {
@@ -57,12 +58,12 @@ function NewResourceForm({ handleClose, onSubmit }) {
         error={formik.touched.description && Boolean(formik.errors.description)}
         helperText={formik.touched.description && formik.errors.description}
       />
-      <Stack direction="row" spacing={10}>
+      <Stack direction="row" spacing={9}>
         <Button variant="outlined" color="error" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="contained" type="submit">
-          Submit
+        <Button variant="contained" type="submit" endIcon={<SendIcon />}>
+          Send
         </Button>
       </Stack>
     </form>
