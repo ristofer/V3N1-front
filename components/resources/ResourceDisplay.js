@@ -5,14 +5,25 @@ import Rating from "@mui/material/Rating";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { Container } from "@mui/material";
+import PreviousPage from "../common/PreviousPage";
 
 function ResourceDisplay({ resource }) {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" component="div">
-          {resource.name}
-        </Typography>
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0 !important",
+          }}
+        >
+          <Typography variant="h5" component="div">
+            {resource.name}
+          </Typography>
+          <PreviousPage goBackText="Back to Learning Unit" />
+        </Container>
 
         <Rating
           id="resource-average"
