@@ -2,26 +2,27 @@
 "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://v3n1-back.herokuapp.com/api/:path*",
+      "destination": "https://v3n1-back.herokuapp.com/api/:path*"
     },
     {
       "source": "/api-docs/:path*",
-      "destination": "https://v3n1-back.herokuapp.com/api-docs/:path*",
+      "destination": "https://v3n1-back.herokuapp.com/api-docs/:path*"
     },
     {
       "source": "/users/sign_in",
-      "destination": "https://v3n1-back.herokuapp.com/users/sign_in",
+      "destination": "https://v3n1-back.herokuapp.com/users/sign_in"
     },
     {
       "source": "/users/sign_out",
-      "destination": "https://v3n1-back.herokuapp.com/users/sign_out",
+      "destination": "https://v3n1-back.herokuapp.com/users/sign_out"
     },
     {
       "source": "/users/sign_up",
-      "destination": "https://v3n1-back.herokuapp.com/users/sign_up",
+      "destination": "https://v3n1-back.herokuapp.com/users/sign_up"
     },
     {
       "source": "/users",
-      "destination": "https://v3n1-back.herokuapp.com/users",
+      "destination": "https://v3n1-back.herokuapp.com/users"
     }
+  ]
 }
