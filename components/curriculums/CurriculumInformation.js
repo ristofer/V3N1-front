@@ -16,7 +16,7 @@ export default function CurriculumInformation({ curriculumId }) {
   }
 
   return (
-    <div style={{ maxWidth: 700, margin: "40px auto", padding: 10 }}>
+    <div style={{ maxWidth: 800, margin: "40px auto", padding: 10 }}>
       <Typography variant="subtitle1" align="center" color="textSecondary">
         <i>Curriculum</i>
       </Typography>

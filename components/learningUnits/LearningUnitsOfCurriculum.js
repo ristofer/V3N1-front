@@ -1,6 +1,6 @@
 import React from "react";
 import { useOperationMethod } from "react-openapi-client";
-import { Alert, Container } from "@mui/material";
+import { Alert, Grid } from "@mui/material";
 import Loader from "../common/Loader";
 import LearningUnit from "./LearningUnit";
 import useFetch from "../../hooks/use-fetch";
@@ -41,7 +41,15 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
     mutate();
   };
   return (
-    <Container maxWidth="sm">
+    <Grid
+      container
+      columnSpacing={8}
+      rowSpacing={4}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       {learningUnitsData.map((learningUnit) => (
         <LearningUnit
           key={learningUnit.id}
@@ -52,6 +60,6 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
           onCheck={onCheck}
         />
       ))}
-    </Container>
+    </Grid>
   );
 }
