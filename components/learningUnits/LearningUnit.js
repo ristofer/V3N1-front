@@ -6,6 +6,7 @@ import {
   CardActions,
   Checkbox,
 } from "@mui/material";
+import Link from "next/link";
 
 function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
   const learningUnitsPath = "/learningUnits/";
@@ -13,12 +14,14 @@ function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
 
   return (
     <Card sx={{ maxWidth: "xl", display: "flex", m: 2 }}>
-      <CardActionArea href={learningUnitsPath + learningUnitId}>
-        <CardContent>
-          <Typography variant="h4" component="div" position="center">
-            {learningUnitName}
-          </Typography>
-        </CardContent>
+      <CardActionArea>
+        <Link href={learningUnitsPath + learningUnitId}>
+          <CardContent>
+            <Typography variant="h4" component="div" position="center">
+              {learningUnitName}
+            </Typography>
+          </CardContent>
+        </Link>
       </CardActionArea>
       <CardActions>
         <Checkbox

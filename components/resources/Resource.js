@@ -6,6 +6,7 @@ import {
   CardActions,
   Rating,
 } from "@mui/material";
+import Link from "next/link";
 
 function Resource({ resource }) {
   const {
@@ -17,12 +18,14 @@ function Resource({ resource }) {
 
   return (
     <Card sx={{ width: 400, display: "flex", m: 2 }}>
-      <CardActionArea sx={{ width: 250 }} href={resourcePath + resourceId}>
-        <CardContent>
-          <Typography variant="h6" component="div" position="center">
-            {name}
-          </Typography>
-        </CardContent>
+      <CardActionArea sx={{ width: 250 }}>
+        <Link href={resourcePath + resourceId}>
+          <CardContent>
+            <Typography variant="h6" component="div" position="center">
+              {name}
+            </Typography>
+          </CardContent>
+        </Link>
       </CardActionArea>
       <CardActions sw={{ width: 100 }}>
         <Rating
