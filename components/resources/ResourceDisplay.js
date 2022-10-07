@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
