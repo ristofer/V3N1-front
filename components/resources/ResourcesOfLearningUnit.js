@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Container } from "@mui/material";
+import { Alert, Grid } from "@mui/material";
 import useFetch from "../../hooks/use-fetch";
 import Loader from "../common/Loader";
 import Resource from "./Resource";
@@ -14,10 +14,19 @@ export default function ResourcesOfLearningUnit({ learningUnitId }) {
   data.sort((a, b) => (b.average_evaluation > a.average_evaluation ? 1 : -1));
 
   return (
-    <Container maxWidth="xl" mt={2}>
+    <Grid
+      container
+      columnSpacing={8}
+      rowSpacing={4}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        padding: 6,
+      }}
+    >
       {data.map((resource) => (
         <Resource key={resource.id} resource={resource} />
       ))}
-    </Container>
+    </Grid>
   );
 }

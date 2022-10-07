@@ -2,9 +2,10 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActionArea,
+  Grid,
   CardActions,
   Rating,
+  Button,
 } from "@mui/material";
 import Link from "next/link";
 
@@ -12,32 +13,41 @@ function Resource({ resource }) {
   const {
     id: resourceId,
     name,
+    description,
     average_evaluation: averageEvaluation,
   } = resource;
   const resourcePath = "/resources/";
 
   return (
-    <Card sx={{ width: 400, display: "flex", m: 2 }}>
-      <CardActionArea sx={{ width: 250 }}>
-        <Link href={resourcePath + resourceId}>
+    <Grid item key={name} xs={12} md={6}>
+      <Card display={{ display: "flex" }}>
+        <div style={{ flex: 1 }}>
           <CardContent>
-            <Typography variant="h6" component="div" position="center">
+            <Typography component="h2" variant="h5">
               {name}
             </Typography>
+
+            <CardActions sw={{ width: 100 }}>
+              <Rating
+                sw={{ width: 200 }}
+                name="half-rating-read"
+                defaultValue={0}
+                precision={0.1}
+                readOnly
+                value={parseFloat(averageEvaluation)}
+              />
+            </CardActions>
+
+            <Typography variant="subtitle1" paragraph>
+              {description}
+            </Typography>
+            <Link href={resourcePath + resourceId}>
+              <Button color="primary">Explore More</Button>
+            </Link>
           </CardContent>
-        </Link>
-      </CardActionArea>
-      <CardActions sw={{ width: 100 }}>
-        <Rating
-          sw={{ width: 200 }}
-          name="half-rating-read"
-          defaultValue={0}
-          precision={0.1}
-          readOnly
-          value={parseFloat(averageEvaluation)}
-        />
-      </CardActions>
-    </Card>
+        </div>
+      </Card>
+    </Grid>
   );
 }
 
