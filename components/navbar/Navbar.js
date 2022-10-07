@@ -29,7 +29,7 @@ function Navbar() {
           />
           <MenuManager
             version="desktop"
-            loggedIn={!!currentUser}
+            loggedIn={Boolean(currentUser)}
             pages={pages}
           />
           <UserBubble />
