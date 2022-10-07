@@ -26,6 +26,7 @@ function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "baseline",
+        paddingBottom: 10,
       }}
     >
       <Card>
