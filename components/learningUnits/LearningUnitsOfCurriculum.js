@@ -48,6 +48,7 @@ export default function LearningUnitsOfCurriculum({ curriculumId }) {
       sx={{
         display: "flex",
         justifyContent: "center",
+        paddingX: 6,
       }}
     >
       {learningUnitsData.map((learningUnit) => (
