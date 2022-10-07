@@ -19,7 +19,9 @@ function NewResource({ onSubmit }) {
 
   return (
     <>
-      <Button onClick={handleOpen}>New Resource</Button>
+      <Button onClick={handleOpen} variant="contained">
+        Add Resource
+      </Button>
       <Modal hideBackdrop open={open} onClose={handleClose}>
         <Box
           sx={{
