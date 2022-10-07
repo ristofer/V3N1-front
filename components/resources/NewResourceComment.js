@@ -1,9 +1,8 @@
-import { OpenAPIProvider } from "react-openapi-client";
 import { useState } from "react";
 import { Button, Modal, Box } from "@mui/material";
 import NewResourceCommentForm from "./NewResourceCommentForm";
 
-function NewResourceComment({ resourceId, newCommentCreation }) {
+function NewResourceComment({ onSubmit }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -20,18 +19,17 @@ function NewResourceComment({ resourceId, newCommentCreation }) {
   };
 
   return (
-    <OpenAPIProvider definition="/api-docs/v1/swagger.json">
+    <>
       <Button onClick={handleOpen}>New comment</Button>
       <Modal hideBackdrop open={open} onClose={handleClose}>
         <Box sx={{ ...style, width: 300 }}>
           <NewResourceCommentForm
-            resourceId={resourceId}
             handleClose={handleClose}
-            newCommentCreation={newCommentCreation}
+            onSubmit={onSubmit}
           />
         </Box>
       </Modal>
-    </OpenAPIProvider>
+    </>
   );
 }
 
