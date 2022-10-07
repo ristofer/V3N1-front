@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, Box } from "@mui/material";
+import { Button, Modal, Box, Container } from "@mui/material";
 import NewResourceCommentForm from "./NewResourceCommentForm";
 
 function NewResourceComment({ onSubmit }) {
@@ -19,7 +19,18 @@ function NewResourceComment({ onSubmit }) {
 
   return (
     <>
-      <Button onClick={handleOpen}>New comment</Button>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          ml: -1,
+          my: 2,
+        }}
+      >
+        <Button onClick={handleOpen} variant="contained">
+          Add comment
+        </Button>
+      </Container>
       <Modal hideBackdrop open={open} onClose={handleClose}>
         <Box sx={{ ...style, width: 300 }}>
           <NewResourceCommentForm
