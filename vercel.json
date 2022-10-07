@@ -2,7 +2,7 @@
 "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://v3n1-back.herokuapp.com//api/:path*",
+      "destination": "https://v3n1-back.herokuapp.com/api/:path*",
     },
     {
       "source": "/api-docs/:path*",
