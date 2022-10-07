@@ -1,4 +1,4 @@
-import { Typography, Alert, Card, CardContent, Container } from "@mui/material";
+import { Typography, Alert, Card, CardContent, Grid } from "@mui/material";
 import Loader from "../common/Loader";
 import useFetch from "../../hooks/use-fetch";
 import PreviousPage from "../common/PreviousPage";
@@ -19,20 +19,40 @@ export default function LearningUnitInformation({ learningUnitId }) {
   return (
     <Card>
       <CardContent>
-        <Container
+        <Grid
           sx={{
             display: "flex",
             justifyContent: "space-between",
             padding: "0 !important",
           }}
         >
-          <Typography variant="h3" component="div">
-            {learningUnit.name}
-          </Typography>
-          <div>
-            <PreviousPage goBackText="Back to curriculum" />
-          </div>
-        </Container>
+          <Grid direction="column" item md={6}>
+            <Grid direction="row" md={6}>
+              <Typography variant="h3" component="div">
+                {learningUnit.name}
+              </Typography>
+
+              <Typography variant="h6" component="div">
+                {learningUnit.description}
+              </Typography>
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            direction="column"
+            justifyContent="space-between"
+            alignItems="flex-end"
+          >
+            <Grid item>
+              <PreviousPage goBackText="Back to curriculum" />
+            </Grid>
+
+            <Grid item>
+              <PreviousPage goBackText="Back " />
+            </Grid>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
