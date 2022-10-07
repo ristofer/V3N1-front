@@ -16,7 +16,7 @@ export default function CurriculumInformation({ curriculumId }) {
   }
 
   return (
-    <div style={{ maxWidth: 700, margin: "40px auto", padding: 10 }}>
+    <div style={{ maxWidth: 800, margin: "40px auto", padding: 10 }}>
       <Typography variant="subtitle1" align="center" color="textSecondary">
         <i>Curriculum</i>
       </Typography>
@@ -24,9 +24,7 @@ export default function CurriculumInformation({ curriculumId }) {
         {curriculum.name}
       </Typography>
       <Typography variant="h6" align="center" color="textSecondary">
-        Quickly build an effective pricing table for your potential customers
-        with this layout. It&apos;s built with default Material-UI components
-        with little customization.
+        {curriculum.description}
       </Typography>
     </div>
   );
