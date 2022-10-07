@@ -2,6 +2,7 @@ import { Typography, Alert, Card, CardContent } from "@mui/material";
 import Loader from "../common/Loader";
 import useFetch from "../../hooks/use-fetch";
 import PreviousPage from "../common/PreviousPage";
+import styles from "../../styles/Home.module.css";
 
 export default function LearningUnitInformation({ learningUnitId }) {
   const { data: learningUnit, error } = useFetch(
@@ -16,15 +17,15 @@ export default function LearningUnitInformation({ learningUnitId }) {
     return <Alert severity="error">Error</Alert>;
   }
 
-  const goBackPageText = "Back to curriculum";
-
   return (
     <Card>
       <CardContent>
-        <PreviousPage goBackText={goBackPageText} />
-        <Typography variant="h2" component="div">
-          {learningUnit.name}
-        </Typography>
+        <div className={styles.containerTitulo}>
+          <Typography variant="h3" component="div">
+            {learningUnit.name}
+          </Typography>
+          <PreviousPage goBackText="Back to curriculum" />
+        </div>
       </CardContent>
     </Card>
   );

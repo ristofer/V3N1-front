@@ -6,17 +6,18 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import PreviousPage from "../common/PreviousPage";
+import styles from "../../styles/Home.module.css";
 
 function ResourceDisplay({ resource }) {
-  const goBackPageText = "Back to Learning Unit";
-
   return (
     <Card>
       <CardContent>
-        <PreviousPage goBackText={goBackPageText} />
-        <Typography variant="h5" component="div">
-          {resource.name}
-        </Typography>
+        <div className={styles.containerTitulo}>
+          <Typography variant="h5" component="div">
+            {resource.name}
+          </Typography>
+          <PreviousPage goBackText="Back to Learning Unit" />
+        </div>
 
         <Rating
           id="resource-average"
