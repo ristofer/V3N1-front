@@ -12,11 +12,9 @@ function ResourceInformation({ resourceId }) {
     mutate: mutateResource,
   } = useFetch(`/api/resources/${resourceId}`);
 
-  const {
-    data: evaluationData,
-    error: evaluationError,
-    mutate,
-  } = useFetch(`/api/resources/${resourceId}/resource_evaluation`);
+  const { data: evaluationData, mutate } = useFetch(
+    `/api/resources/${resourceId}/resource_evaluation`
+  );
 
   const [setResourceEvaluation] = useOperationMethod("setResourceEvaluation");
 
