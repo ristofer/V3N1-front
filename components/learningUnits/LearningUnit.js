@@ -12,7 +12,11 @@ import Link from "next/link";
 
 function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
   const learningUnitsPath = "/learningUnits/";
-  const { id: learningUnitId, name: learningUnitName } = learningUnit;
+  const {
+    id: learningUnitId,
+    name: learningUnitName,
+    description: learningUnitDescription,
+  } = learningUnit;
 
   return (
     <Grid
@@ -41,8 +45,6 @@ function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
             title={learningUnitName}
             titleTypographyProps={{ align: "center" }}
             subheaderTypographyProps={{ align: "center" }}
-            sw={{ backgroundColor: "" }}
-            // className={classes.cardHeader}
           />
           <div
             style={{
@@ -62,8 +64,7 @@ function LearningUnit({ learningUnit, isPreviouslyCompleted, onCheck }) {
         </div>
         <CardContent>
           <Typography variant="subtitle1" align="center">
-            texto de prueba, aca ba loa descripciostexto de prueba, aca ba loa
-            descripciostexto de prueba, aca ba loa descripcios
+            {learningUnitDescription}
           </Typography>
         </CardContent>
         <CardActions>

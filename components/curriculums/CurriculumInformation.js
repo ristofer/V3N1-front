@@ -24,9 +24,7 @@ export default function CurriculumInformation({ curriculumId }) {
         {curriculum.name}
       </Typography>
       <Typography variant="h6" align="center" color="textSecondary">
-        Quickly build an effective pricing table for your potential customers
-        with this layout. It&apos;s built with default Material-UI components
-        with little customization.
+        {curriculum.description}
       </Typography>
     </div>
   );
