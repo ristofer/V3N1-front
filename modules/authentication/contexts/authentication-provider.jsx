@@ -1,13 +1,14 @@
 import { useOperationMethod } from "react-openapi-client";
 import { useMemo, useCallback } from "react";
 import { useRouter } from "next/router";
+import { useSWRConfig } from "swr";
 import AuthenticationContext from "./authentication-context";
 import useFetch from "../../../hooks/use-fetch";
 
 function AuthenticationProvider({ children }) {
   const [endSession] = useOperationMethod("endSession");
   const router = useRouter();
-
+  const { mutate } = useSWRConfig();
   const { data, error } = useFetch("/api/current_session");
 
   const signOut = useCallback(async () => {
@@ -17,7 +18,7 @@ function AuthenticationProvider({ children }) {
     if (router.pathname !== "/") {
       await router.push("/");
     }
-    window.location.reload();
+    mutate("/api/current_session");
   }, [endSession, error, router]);
 
   const context = useMemo(
